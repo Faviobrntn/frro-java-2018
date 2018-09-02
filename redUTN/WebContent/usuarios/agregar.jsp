@@ -40,14 +40,14 @@
 			            <div class="row">
 			                <div class="col-md-6 mb-3">
 			                    <label for="firstName">Nombre</label>
-			                    <input type="text" name="nombre" class="form-control" id="firstName" placeholder="" value="" required="">
+			                    <input type="text" name="nombre" class="form-control" id="firstName" placeholder="" required="required">
 			                    <div class="invalid-feedback">
 			                        Valid first name is required.
 			                    </div>
 			                </div>
 			                <div class="col-md-6 mb-3">
 			                    <label for="lastName">Apellido</label>
-			                    <input type="text" name="apellido" class="form-control" id="lastName" placeholder="" value="" required="">
+			                    <input type="text" name="apellido" class="form-control" id="lastName" placeholder="" required="required">
 			                    <div class="invalid-feedback">
 			                        Valid last name is required.
 			                    </div>
@@ -56,7 +56,7 @@
 			
 			            <div class="mb-3">
 			                <label for="email">Email <span class="text-muted">(No es Optional)</span></label>
-			                <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
+			                <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com" required="required">
 			                <div class="invalid-feedback">
 			                    Please enter a valid email address for shipping updates.
 			                </div>
@@ -64,7 +64,7 @@
 			
 			            <div class="mb-3">
 			                <label for="password">Contraseña</label>
-			                <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña" required="">
+			                <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña" required="required">
 			                <div class="invalid-feedback">
 			                    Please enter your shipping password.
 			                </div>
