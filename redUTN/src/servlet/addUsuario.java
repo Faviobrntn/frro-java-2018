@@ -9,19 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.tribes.group.interceptors.TwoPhaseCommitInterceptor.MapEntry;
-
 /**
- * Servlet implementation class login
+ * Servlet implementation class addUsuario
  */
-@WebServlet({ "/login", "/Login", "/LOGIN" })
-public class login extends HttpServlet {
+@WebServlet({ "/addUsuario", "/addusuario", "/addUSUARIO", "/Usuarios/agregar", "/usuarios/agregar" })
+public class addUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public login() {
+    public addUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,11 +36,12 @@ public class login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//doGet(request, response);
 		for(Entry<String, String[]> entry : request.getParameterMap().entrySet()){
 			System.out.println(entry.getKey()+" - "+entry.getValue()[0]);
 		}
+		
+		System.out.print("Esta es un Alta");
 		//System.out.println(request.getParameter(""));
 		if(request.getParameter("alta") != null) {
 			System.out.print("Esta es un Alta");
@@ -56,7 +55,7 @@ public class login extends HttpServlet {
 		if(request.getParameter("search") != null) {
 			System.out.print("Esta es una Busqueda");
 		}
-		
+		request.getRequestDispatcher("/usuarios/index.jsp").forward(request, response);
 	}
 
 }

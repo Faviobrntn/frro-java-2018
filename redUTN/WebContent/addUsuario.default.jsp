@@ -24,13 +24,13 @@
   </head>
 
   <body class="text-center">
-    <form class="form-signin" action="login" method="post">
+    <form class="form-signin" action="addUsuario" method="post">
       <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Ingrese los datos</h1>
       <label for="inputEmail" class="sr-only">Nombre</label>
-      <input type="email" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required autofocus>
+      <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required autofocus>
       <label for="inputEmail" class="sr-only">Apellido</label>
-      <input type="email" name="apellido" id="apellido" class="form-control" placeholder="Apellido" required autofocus>
+      <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellido" required autofocus>
       <label for="inputEmail" class="sr-only">Email</label>
       <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>

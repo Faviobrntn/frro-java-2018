@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class testLogin
  */
-@WebServlet({ "/testLogin", "/TESTLOGIN", "/testlogin", "/TESTlogin", "/testLOGIN" })
-public class testLogin extends HttpServlet {
+@WebServlet({ "/home", "/Home", "/HOME"})
+public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public testLogin() {
+    public Home() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,7 +53,7 @@ public class testLogin extends HttpServlet {
 		 */
 		System.out.println(request.getParameter("email"));
 		//doGet(request, response);
-		request.getRequestDispatcher("WEB-INF/login.html").forward(request, response);
+		//request.getRequestDispatcher("WEB-INF/login.html").forward(request, response);
 	}
 
 }
