@@ -14,6 +14,7 @@ import org.apache.catalina.tribes.group.interceptors.TwoPhaseCommitInterceptor.M
 /**
  * Servlet implementation class login
  */
+@SuppressWarnings("unused")
 @WebServlet({ "/login", "/Login", "/LOGIN" })
 public class login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
