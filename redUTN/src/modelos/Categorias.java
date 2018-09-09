@@ -1,11 +1,11 @@
 package modelos;
 
-public class Carreras {
-	private static int id;
+public class Categorias {
+	private int id;
 	private String nombre;
 	private String descripcion;
-	
-	public static int getId() {
+
+	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -23,4 +23,6 @@ public class Carreras {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+
 }
