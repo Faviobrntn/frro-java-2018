@@ -29,7 +29,7 @@
 	            <h1 class="h2">Listado de Usuarios</h1>
 	            <div class="btn-toolbar mb-2 mb-md-0">
 	              <div class="btn-group mr-2">
-	                <a href="/redUTN/usuarios/agregar.jsp" class="btn btn-sm btn-outline-secondary">Nuevo usuario</a>
+	                <a href="/AVerSiAhorra/usuarios/agregar.jsp" class="btn btn-sm btn-outline-secondary">Nuevo usuario</a>
 	                <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
 	              </div>
 	            </div>
@@ -77,10 +77,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../js/jquery.min.css"></script>
-    <script>window.jQuery || document.write('<script src="./jquery-slim.min.js"><\/script>')</script>
+    <script src="../js/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../jquery-slim.min.js"><\/script>')</script>
     <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.css"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>

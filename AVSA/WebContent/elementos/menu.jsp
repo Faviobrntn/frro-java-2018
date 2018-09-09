@@ -3,19 +3,21 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <!-- <a class="nav-link active" href="LinkToPage?url=home.jsp"> -->
-                <a class="nav-link active" href="/redUTN/home.jsp">
+                <a class="nav-link active" href="Enlace?url=home.jsp">
+                <!-- <a class="nav-link active" href="/AVerSiAhorra/home.jsp">-->
                     <span data-feather="home"></span>
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/redUTN/usuarios/index.jsp">
+            	<!-- <a class="nav-link active" href="Enlace?url=home.jsp">-->
+                <a class="nav-link" href="/AVerSiAhorra/usuarios/index.jsp"> 
                     <span data-feather="users"></span>
                     Usuarios
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/redUTN/home.jsp">
+                <a class="nav-link" href="/AVerSiAhorra/home.jsp">
                     <span data-feather="file"></span>
                     Orders
                 </a>
