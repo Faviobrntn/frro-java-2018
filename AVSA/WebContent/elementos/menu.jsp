@@ -1,9 +1,10 @@
+ <%! String url = "/AVerSiAhorra/"; %>
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
                 <!-- <a class="nav-link active" href="LinkToPage?url=home.jsp"> -->
-                <a class="nav-link active" href="Enlace?url=home.jsp">
+                <a class="nav-link active" href="<%= url %>home.jsp">
                 <!-- <a class="nav-link active" href="/AVerSiAhorra/home.jsp">-->
                     <span data-feather="home"></span>
                     Dashboard <span class="sr-only">(current)</span>
@@ -11,27 +12,21 @@
             </li>
             <li class="nav-item">
             	<!-- <a class="nav-link active" href="Enlace?url=home.jsp">-->
-                <a class="nav-link" href="/AVerSiAhorra/usuarios/index.jsp"> 
+                <a class="nav-link" href="<%= url %>usuarios/index.jsp"> 
                     <span data-feather="users"></span>
                     Usuarios
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/AVerSiAhorra/home.jsp">
+                <a class="nav-link" href="<%= url %>categorias.jsp">
                     <span data-feather="file"></span>
-                    Orders
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="shopping-cart"></span>
-                    Products
+                    Categorias
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="bar-chart-2"></span>
-                    Reports
+                    Reportes
                 </a>
             </li>
             <li class="nav-item">

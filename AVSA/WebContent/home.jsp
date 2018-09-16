@@ -47,7 +47,7 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Header</th>
+                  <th>${msg}</th>
                   <th>Header</th>
                   <th>Header</th>
                   <th>Header</th>
