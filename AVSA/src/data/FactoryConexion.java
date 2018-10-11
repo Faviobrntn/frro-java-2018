@@ -12,6 +12,8 @@ public class FactoryConexion {
 	private String db="futnDB";
 	private String type="mysql";
 	
+	private static FactoryConexion instancia;
+	
 	public void FactoryConexion() {
 		try {
 			Class.forName(driver);
@@ -20,7 +22,15 @@ public class FactoryConexion {
 		}
 	}
 	
-	public Connection getConn(){
+	public static FactoryConexion getInstancia(){
+		if (FactoryConexion.instancia == null){		
+			FactoryConexion.instancia=new FactoryConexion();
+		}
+		return FactoryConexion.instancia;
+		
+}
+	
+/*	public Connection getConn(){
 		try {
 			if(conn==null || conn.isClosed()){
 				conn = DriverManager.getConnection(
@@ -32,6 +42,32 @@ public class FactoryConexion {
 			new ApplicationException("Error connecting to the DB",e);
 
 		}
+		return conn; 
+	}*/
+	
+	private Connection conn;
+	private int cantConn=0;
+	public Connection getConn() throws SQLException,AppDataException{
+		try {
+			if(conn==null || conn.isClosed()){	
+				conn = DriverManager.getConnection(
+			        "jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+password);
+			}
+		} catch (SQLException e) {
+			throw new AppDataException(e, "Error al conectar a la base de datos");
+		}
+		cantConn++;
 		return conn;
 	}
+	
+	public void releaseConn() throws SQLException{
+		try {
+			cantConn--;
+			if(cantConn==0){
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw e;
+		}
+}
 }

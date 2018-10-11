@@ -60,14 +60,14 @@ public class DataUsuario {
 		
 	}
 	
-	public Usuario getByDni(Usuario usu) throws Exception{
+	public Usuario getByUsuario(Usuario usu) throws Exception{
 		Usuario u=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
 					"select u.id, nombre, apellido, id_pais, p.nombre from usuarios u inner join paises p on u.id_pais=p.id where dni=?");
-			stmt.setString(1, usu.getDni());
+			stmt.setString(1, usu.getUsuario());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()){
 					u=new Usuario();
@@ -154,7 +154,7 @@ public class DataUsuario {
 			}
 		}
 
-		return p;
+		return u;
 	}
 
 	public void remove(Usuario u) throws Exception{

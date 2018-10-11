@@ -44,16 +44,16 @@ public class CtrlABMUsuario {
 		return dataUsu.getByNombreApellido(u);		
 	}
 	
-	public ArrayList<usuario> getAll()throws Exception{
+	public ArrayList<Usuario> getAll()throws Exception{
 		return dataUsu.getAll();
 	}
 	
 	public String usuarioListText() throws Exception {
 		String texto="Apellido\tNombre\tPais\n";
-		ArrayList<Usuario> usuarioss =this.getAll();
+		ArrayList<Usuario> usuarios =this.getAll();
 		for (Usuario u : usuarios){
-			texto= texto +p.getApellido()+"\t"+p.getNombre()+"\t"+
-					p.getPais().getNombre()+"\n";
+			texto= texto +u.getApellido()+"\t"+u.getNombre()+"\t"+
+					u.getPais().getNombre()+"\n";
 		}
 		return texto;
 	}
