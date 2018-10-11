@@ -1,12 +1,15 @@
-package modelos;
+package entity;
 
-public class Usuarios {
+import java.io.Serializable;
+
+public class Usuario implements Serializable{
 	private int id;
 	private String usuario;
 	private String password;
 	private String nombre;
 	private String apellido;
 	private String email;
+	private Pais pais;
 	
 	public int getId() {
 		return id;
@@ -44,6 +47,27 @@ public class Usuarios {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public Pais getPais() {
+		return pais;
+	}
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
+	public Usuario (String nombre, String apellido, String email){
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.setEmail(email);
+	}
 	
+	public Usuario(){}
+	
+	@Override
+	public boolean equals(Object p){
+		return (p instanceof Usuario) &&
+				(((Usuario)p).getId()==this.getId());
+					
+
+}
 
 }

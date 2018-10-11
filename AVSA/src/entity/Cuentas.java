@@ -1,4 +1,4 @@
-package modelos;
+package entity;
 
 public class Cuentas {
 	private int id;

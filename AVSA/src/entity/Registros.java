@@ -1,4 +1,4 @@
-package modelos;
+package entity;
 import javax.print.attribute.DateTimeSyntax;;
 public class Registros {
 	private int id;

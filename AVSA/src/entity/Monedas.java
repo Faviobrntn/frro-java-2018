@@ -1,6 +1,6 @@
-package modelos;
+package entity;
 
-public class Paises {
+public class Monedas {
 	private int id;
 	private String nombre;
 	
@@ -16,6 +16,5 @@ public class Paises {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
 
 }
