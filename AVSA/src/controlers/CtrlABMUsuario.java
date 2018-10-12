@@ -37,7 +37,7 @@ public class CtrlABMUsuario {
 	public Usuario getByUsuario(String usuario)throws Exception{
 		Usuario u=new Usuario();
 		u.setUsuario(usuario);
-		return getByUsuario(u);
+		return dataUsu.getByUsuario(u);
 	}
 	
 	public Usuario getByNombreApellido(Usuario u) throws Exception{

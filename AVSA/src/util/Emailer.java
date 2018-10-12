@@ -13,6 +13,7 @@ public class Emailer {
 	private Properties props;
 	
 	public static Emailer getInstance(){
+		 /*Es un singleton, lo crea una sola vez*/
 		if (instance==null){
 			instance=new Emailer();
 		}
