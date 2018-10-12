@@ -32,10 +32,17 @@
                 <button class="btn btn-sm btn-outline-secondary">Share</button>
                 <button class="btn btn-sm btn-outline-secondary">Export</button>
               </div>
-              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-              </button>
+              <div class="dropdown">
+              	<button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownview" aria-haspopup="true" aria-expanded="false">
+                	<span data-feather="calendar"></span>
+                	View
+              	</button>  
+               	<div class="dropdown-menu" aria-labelledby="dropdownview">
+    				<a class="dropdown-item" href="#">This week</a>
+    				<a class="dropdown-item" href="#">This month</a>
+    				<a class="dropdown-item" href="#">This year</a>
+  				</div>
+              </div>
             </div>
           </div>
 
