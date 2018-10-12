@@ -33,7 +33,7 @@
                 <button class="btn btn-sm btn-outline-secondary">Export</button>
               </div>
               <div class="dropdown">
-              	<button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownview" aria-haspopup="true" aria-expanded="false">
+              	<button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownview" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 	<span data-feather="calendar"></span>
                 	View
               	</button>  

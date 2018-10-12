@@ -9,7 +9,7 @@ public class FactoryConexion {
 	private String port="3306";
 	private String user="root";
 	private String pass="";
-	private String db="futnDB";
+	private String db="aversiahorra";
 	private String type="mysql";
 	
 	private static FactoryConexion instancia;
