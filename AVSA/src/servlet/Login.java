@@ -41,6 +41,7 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		/*
 		for(Entry<String, String[]> entry : request.getParameterMap().entrySet()){
 			System.out.println(entry.getKey()+" - "+entry.getValue()[0]);
 		}
@@ -57,6 +58,7 @@ public class Login extends HttpServlet {
 		if(request.getParameter("search") != null) {
 			System.out.print("Esta es una Busqueda");
 		}
+		*/
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 		//request.getRequestDispatcher("/Home.jsp").forward(request, response); 
 	}
