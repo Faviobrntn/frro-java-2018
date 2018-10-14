@@ -14,8 +14,7 @@ public ArrayList<Pais> getAll() throws Exception{
 		ResultSet rs=null;
 		ArrayList<Pais> paises= new ArrayList<Pais>();
 		try{
-			stmt = FactoryConexion.getInstancia()
-					.getConn().createStatement();
+			stmt = FactoryConexion.getInstancia().getConn().createStatement();
 			rs = stmt.executeQuery("select * from categoria");
 			if(rs!=null){
 				while(rs.next()){
