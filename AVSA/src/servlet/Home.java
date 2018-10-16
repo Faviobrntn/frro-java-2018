@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet({ "/home", "/Home", "/HOME"})
+@WebServlet({ "/home/*", "/Home/*", "/HOME/*"})
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,7 +25,11 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("Entro al HOME por GET");
+		response.getWriter().append("get");
+		
+		request.getRequestDispatcher("/home.jsp").forward(request, response);
 	}
 
 	/**
@@ -49,9 +53,38 @@ public class Home extends HttpServlet {
 		 * request.getRequestDispatcher("WEB-INF/UserManagement.jsp")  
 		 * --> sirve para evitar accesos ilegales, todo lo que este aca esta protegido y solo se puede acceder por servlent
 		 */
-		System.out.println(request.getParameter("email"));
-		//doGet(request, response);
+		System.out.println("Entro al HOME por POST");
+		doGet(request, response);
 		//request.getRequestDispatcher("WEB-INF/login.html").forward(request, response);
+	}
+	
+	
+	/**
+	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.print("Esta es un PUT");
+	}
+
+	/**
+	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.print("Esta es un DELETE");
+	}
+
+	
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.print("Esta es una opcion");
+	}
+	
+	
+	protected void doTrace(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.print("Esta es un trace");
 	}
 
 }
