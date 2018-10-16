@@ -29,7 +29,7 @@
 	            <h1 class="h2">Listado de Usuarios</h1>
 	            <div class="btn-toolbar mb-2 mb-md-0">
 	              <div class="btn-group mr-2">
-	                <a href="/AVerSiAhorra/usuarios/agregar.jsp" class="btn btn-sm btn-outline-secondary">Nuevo usuario</a>
+	                <a href="/AVerSiAhorra/usuarios/agregar?accion=1" class="btn btn-sm btn-outline-secondary">Nuevo usuario</a>
 	                <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
 	              </div>
 	            </div>
