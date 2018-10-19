@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Usuarios
  */
-@WebServlet({ "/usuario/*", "/Usuario/*", "/USUARIO/*" })
+@WebServlet({ "/usuarios/*", "/Usuarios/*", "/USUARIOS/*" })
 public class Usuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,33 +32,27 @@ public class Usuarios extends HttpServlet {
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
 		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 		response.setDateHeader("Expires", 0); // Proxies.
-		System.out.println("ABM de Usuario");
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("ABM de Usuarios");
-		System.out.println(request.getParameter("id"));
-		if(request.getParameter("accion") != null) {
-			System.out.print("Esta es un accion");
-		}
-		request.setAttribute("variable", "valor del parametro");
+
+		//request.setAttribute("variable", "valor del parametro");
 		switch (request.getPathInfo()) {
 			case "/agregar":
 				System.out.print("metodo agregar");
 				request.getRequestDispatcher("/usuarios/agregar.jsp").forward(request, response);
-				break;}
+				break;
 				
-		/*	case "/baja":
-				this.baja(request,response);
+			case "/baja":
+				//this.baja(request,response);
 				break;
 				
 			case "/modificacion":
-				this.modificacion(request,response);
+				//this.modificacion(request,response);
 				break;
 	
 			default:
 				request.getRequestDispatcher("/usuarios/index.jsp").forward(request, response);
-				this.error(request,response);
+				//this.error(request,response);
 				break;
-		}*/
+		}
 		
 		//request.getRequestDispatcher("/usuarios/index.jsp").forward(request, response);
 	}

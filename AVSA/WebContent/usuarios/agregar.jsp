@@ -29,14 +29,14 @@
 	            <h1 class="h2">Nuevo Usuario</h1>
 	            <div class="btn-toolbar mb-2 mb-md-0">
 	              <div class="btn-group mr-2">
-	                <a href="/AVerSiAhorra/usuarios" class="btn btn-sm btn-outline-secondary">Volver</a>
+	                <a href="../usuarios" class="btn btn-sm btn-outline-secondary">Volver</a>
 	              </div>
 	            </div>
 	        </div>
 	        <div class="row">    
 			    <div class="col-md-8">
 			        <h4 class="mb-3">Complete el formulario</h4>
-			        <form action="/usuarios/alta" method="post" class="needs-validation" novalidate="">
+			        <form action="../usuarios/alta" method="post" class="needs-validation" novalidate="">
 			            <div class="row">
 			                <div class="col-md-6 mb-3">
 			                    <label for="firstName">Nombre</label>

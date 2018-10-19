@@ -8,7 +8,7 @@ public class Ppal {
 	
 	public static void main(String[] args) {
 		FactoryConexion fc = new FactoryConexion();
-		Connection conn = fc.getConn();
+		Connection conn = null;//fc.getConn();
 		
 		Statement stmt=null;
 		ResultSet rs=null;

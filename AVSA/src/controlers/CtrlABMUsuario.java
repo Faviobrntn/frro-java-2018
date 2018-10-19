@@ -62,7 +62,7 @@ public class CtrlABMUsuario {
 		return dataPais.getAll();
 	}
 	
-	public usuario login(Usuario usu) throws Exception{
+	public Usuario login(Usuario usu) throws Exception{
 		return dataUsu.getLogedUser(usu);
 	}
 }
