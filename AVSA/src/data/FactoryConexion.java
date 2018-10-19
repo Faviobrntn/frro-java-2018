@@ -2,6 +2,8 @@ package data;
 
 import java.sql.*;
 
+import util.AppDataException;
+
 
 public class FactoryConexion {
 	private String driver="com.mysql.jdbc.Driver";
@@ -51,7 +53,7 @@ public class FactoryConexion {
 		try {
 			if(conn==null || conn.isClosed()){	
 				conn = DriverManager.getConnection(
-			        "jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+password);
+			        "jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+pass);
 			}
 		} catch (SQLException e) {
 			throw new AppDataException(e, "Error al conectar a la base de datos");

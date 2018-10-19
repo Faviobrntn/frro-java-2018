@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Usuarios
  */
-@WebServlet({ "/usuarios/*", "/Usuarios/*", "/USUARIOS/*" })
+@WebServlet({ "/usuario/*", "/Usuario/*", "/USUARIO/*" })
 public class Usuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -72,10 +72,10 @@ public class Usuarios extends HttpServlet {
 		for(Entry<String, String[]> entry : request.getParameterMap().entrySet()){
 			System.out.println(entry.getKey()+" - "+entry.getValue()[0]);
 		}
-		
+		System.out.println("HOLAAAAAAAAAAA");
 		System.out.print(request.getPathInfo());
 		//System.out.println(request.getParameter(""));
-		if(request.getParameter("alta") != null) {
+		if(request.getParameter("agregar") != null) {
 			System.out.println("Esta es un a");
 			System.out.println("La puta maaaadreeeee!!! ");
 			this.agregar(request, response);
@@ -86,9 +86,7 @@ public class Usuarios extends HttpServlet {
 		if(request.getParameter("edit") != null) {
 			System.out.print("Esta es una Modificación");
 		}
-		if(request.getParameter("search") != null) {
-			System.out.print("Esta es una Busqueda");
-		}
+		
 		request.getRequestDispatcher("/usuarios/index.jsp").forward(request, response);
 	}
 	

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import org.apache.logging.log4j.Level;
+import logging.log4j.Level;
 
 import java.security.KeyStore.ProtectionParameter;
 import java.sql.*;

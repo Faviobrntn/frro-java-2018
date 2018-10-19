@@ -59,7 +59,7 @@ public class Login extends HttpServlet {
 		System.out.println("POST");
 		
 		//Si esta logeado lo redirijo a la home
-		response.sendRedirect("/AVerSiAhorra/home");
+		response.sendRedirect("home");
 				
 				
 		//request.getRequestDispatcher("/home").forward(request, response);
