@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Map.Entry;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,10 +29,10 @@ public class Usuarios extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-		httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-		httpResponse.setDateHeader("Expires", 0); // Proxies.
-		response.getWriter("ABM de UUsauri");
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		response.setDateHeader("Expires", 0); // Proxies.
+		System.out.println("ABM de Usuario");
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("ABM de Usuarios");
 		System.out.println(request.getParameter("id"));
@@ -42,9 +44,9 @@ public class Usuarios extends HttpServlet {
 			case "/agregar":
 				System.out.print("metodo agregar");
 				request.getRequestDispatcher("/usuarios/agregar.jsp").forward(request, response);
-				break;
+				break;}
 				
-			case "/baja":
+		/*	case "/baja":
 				this.baja(request,response);
 				break;
 				
@@ -56,7 +58,7 @@ public class Usuarios extends HttpServlet {
 				request.getRequestDispatcher("/usuarios/index.jsp").forward(request, response);
 				this.error(request,response);
 				break;
-		}
+		}*/
 		
 		//request.getRequestDispatcher("/usuarios/index.jsp").forward(request, response);
 	}

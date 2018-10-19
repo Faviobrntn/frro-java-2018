@@ -56,10 +56,10 @@ public class Login extends HttpServlet {
 		if(request.getParameter("search") != null) {
 			System.out.print("Esta es una Busqueda");
 		}
-		System.out.println("POOOOST");
+		System.out.println("POST");
 		
 		//Si esta logeado lo redirijo a la home
-		response.sendRedirect("/home");
+		response.sendRedirect("/AVerSiAhorra/home");
 				
 				
 		//request.getRequestDispatcher("/home").forward(request, response);
