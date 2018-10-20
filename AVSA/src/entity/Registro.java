@@ -1,6 +1,6 @@
 package entity;
 import javax.print.attribute.DateTimeSyntax;;
-public class Registros {
+public class Registro {
 	private int id;
 	private String tipo;
 	private float importe;

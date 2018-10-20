@@ -27,7 +27,7 @@ public class Home extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("Entro al HOME por GET");
-		response.getWriter().append("get");
+		//response.getWriter().append("get");
 		
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
 	}

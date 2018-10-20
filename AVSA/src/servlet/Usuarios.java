@@ -32,29 +32,36 @@ public class Usuarios extends HttpServlet {
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
 		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 		response.setDateHeader("Expires", 0); // Proxies.
-
+		
+		System.out.println(request.getPathInfo());
+		
 		//request.setAttribute("variable", "valor del parametro");
+		if(request.getPathInfo() == null) {
+			request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+		}
 		switch (request.getPathInfo()) {
 			case "/agregar":
 				System.out.print("metodo agregar");
-				request.getRequestDispatcher("/usuarios/agregar.jsp").forward(request, response);
+				request.getRequestDispatcher("/users/agregar.jsp").forward(request, response);
 				break;
 				
 			case "/baja":
-				//this.baja(request,response);
+				response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through get");
 				break;
 				
 			case "/modificacion":
-				//this.modificacion(request,response);
+				response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through get");
 				break;
-	
+			
+			case "/":
+				request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+				break;
+				
 			default:
-				request.getRequestDispatcher("/usuarios/index.jsp").forward(request, response);
-				//this.error(request,response);
+				request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 				break;
 		}
-		
-		//request.getRequestDispatcher("/usuarios/index.jsp").forward(request, response);
+		//request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 	}
 
 	/**

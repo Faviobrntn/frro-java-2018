@@ -1,6 +1,6 @@
 package entity;
 
-public class Monedas {
+public class Moneda {
 	private int id;
 	private String nombre;
 	

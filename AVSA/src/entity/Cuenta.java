@@ -1,21 +1,28 @@
 package entity;
 
-public class Categorias {
+public class Cuenta {
 	private int id;
-	private String nombre;
+	private float saldo;
+	private String tipo;
 	private String descripcion;
-
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNombre() {
-		return nombre;
+	public float getSaldo() {
+		return saldo;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setSaldo(float saldo) {
+		this.saldo = saldo;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	public String getDescripcion() {
 		return descripcion;
