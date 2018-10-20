@@ -10,10 +10,10 @@
     <title>Dashboard - Home</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./styles/bootstrap.min.css" rel="stylesheet">
+    <link href="../styles/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="./styles/dashboard.css" rel="stylesheet">
+    <link href="../styles/dashboard.css" rel="stylesheet">
   </head>
 
   <body>
@@ -78,10 +78,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./js/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="./jquery-slim.min.js"><\/script>')</script>
-    <script src="./js/popper.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>

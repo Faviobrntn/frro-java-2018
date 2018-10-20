@@ -4,21 +4,21 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <!-- <a class="nav-link active" href="LinkToPage?url=home.jsp"> -->
-                <a class="nav-link active" href="<%= url %>home">
-                <!-- <a class="nav-link active" href="/AVerSiAhorra/home.jsp">-->
+                <!--<a class="nav-link active" href="< %= url %>home">-->
+                <a class="nav-link active" href="../home/">
                     <span data-feather="home"></span>
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
-            	<!-- <a class="nav-link active" href="Enlace?url=home.jsp">-->
-                <a class="nav-link" href="<%= url %>usuarios"> 
+                <!--<a class="nav-link" href="< %= url %>usuarios/"> -->
+                <a class="nav-link" href="../usuarios/">
                     <span data-feather="users"></span>
                     Usuarios
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<%= url %>categorias">
+                <a class="nav-link" href="<%= url %>categorias/">
                     <span data-feather="file"></span>
                     Categorias
                 </a>

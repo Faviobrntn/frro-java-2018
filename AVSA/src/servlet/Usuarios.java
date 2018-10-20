@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Usuarios
  */
-@WebServlet({ "/usuarios/*", "/Usuarios/*", "/USUARIOS/*" })
+@WebServlet({ "/usuarios/*", "/Usuarios/*", "/USUARIOS/*", "/usuarios" })
 public class Usuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,28 +38,29 @@ public class Usuarios extends HttpServlet {
 		//request.setAttribute("variable", "valor del parametro");
 		if(request.getPathInfo() == null) {
 			request.getRequestDispatcher("/users/index.jsp").forward(request, response);
-		}
-		switch (request.getPathInfo()) {
-			case "/agregar":
-				System.out.print("metodo agregar");
-				request.getRequestDispatcher("/users/agregar.jsp").forward(request, response);
-				break;
+		}else {
+			switch (request.getPathInfo()) {
+				case "/alta":
+					System.out.print("metodo agregar");
+					request.getRequestDispatcher("/users/alta.jsp").forward(request, response);
+					break;
+					
+				case "/baja":
+					response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through get");
+					break;
+					
+				case "/modificacion":
+					response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through get");
+					break;
 				
-			case "/baja":
-				response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through get");
-				break;
-				
-			case "/modificacion":
-				response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through get");
-				break;
-			
-			case "/":
-				request.getRequestDispatcher("/users/index.jsp").forward(request, response);
-				break;
-				
-			default:
-				request.getRequestDispatcher("/users/index.jsp").forward(request, response);
-				break;
+				case "/":
+					request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+					break;
+					
+				default:
+					request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+					break;
+			}
 		}
 		//request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 	}

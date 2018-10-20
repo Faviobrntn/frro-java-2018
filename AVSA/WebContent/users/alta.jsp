@@ -29,7 +29,7 @@
 	            <h1 class="h2">Nuevo Usuario</h1>
 	            <div class="btn-toolbar mb-2 mb-md-0">
 	              <div class="btn-group mr-2">
-	                <a href="../usuarios" class="btn btn-sm btn-outline-secondary">Volver</a>
+	                <a href="../usuarios/" class="btn btn-sm btn-outline-secondary">Volver</a>
 	              </div>
 	            </div>
 	        </div>
