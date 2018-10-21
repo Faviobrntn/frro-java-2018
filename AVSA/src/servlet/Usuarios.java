@@ -41,7 +41,7 @@ public class Usuarios extends HttpServlet {
 		}else {
 			switch (request.getPathInfo()) {
 				case "/alta":
-					System.out.print("metodo agregar");
+					System.out.println("metodo agregar");
 					request.getRequestDispatcher("/users/alta.jsp").forward(request, response);
 					break;
 					
@@ -71,31 +71,58 @@ public class Usuarios extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		
+		System.out.println("ENTRO POR POST");
+		System.out.println(request.getPathInfo());
+		System.out.println(request.getParameter("alta"));
+		//System.out.println(request.getParameter(""));
+		if(request.getParameter("alta") != null || request.getPathInfo() == "alta") {
+			guardar(request, response);
+		}
+		if(request.getParameter("baja") != null) {
+			System.out.println("Esta es una Baja");
+			baja(request, response);
+		}
+		if(request.getParameter("modificacion") != null) {
+			System.out.println("Esta es una Modificación");
+			modificacion(request, response);
+		}
+		
+		request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+	}
+	
+	
+	protected void guardar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//doGet(request, response);
 		for(Entry<String, String[]> entry : request.getParameterMap().entrySet()){
 			System.out.println(entry.getKey()+" - "+entry.getValue()[0]);
 		}
-		System.out.println("HOLAAAAAAAAAAA");
-		System.out.print(request.getPathInfo());
-		//System.out.println(request.getParameter(""));
-		if(request.getParameter("agregar") != null) {
-			System.out.println("Esta es un a");
-			System.out.println("La puta maaaadreeeee!!! ");
-			this.agregar(request, response);
+		if(request.getParameter("id") != null) {
+			System.out.println("Es una MODIFICACIOOOOON");
+		}else {
+			System.out.println("Es un ALTA");
 		}
-		if(request.getParameter("baja") != null) {
-			System.out.print("Esta es una Baja");
-		}
-		if(request.getParameter("edit") != null) {
-			System.out.print("Esta es una Modificación");
-		}
-		
-		request.getRequestDispatcher("/usuarios/index.jsp").forward(request, response);
 	}
 	
-	
-	protected void agregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void modificacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		request.getRequestDispatcher("/usuarios/agregar.jsp").forward(request, response);
+		
+		System.out.println("MODIFICACIOOOOON");
+		System.out.println(request.getPathInfo());
+		System.out.println(request.getParameter("id"));
+		request.getRequestDispatcher("/users/modificacion.jsp").forward(request, response);
 	}
+	
+	protected void baja(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//doGet(request, response);
+		
+		System.out.println("DELETEEEEEE");
+		System.out.println(request.getPathInfo());
+		System.out.println(request.getParameter("id"));
+		request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+	}
+	
 }

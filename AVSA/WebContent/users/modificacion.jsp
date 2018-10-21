@@ -1,7 +1,8 @@
-<!doctype html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
   <head>
-    <meta charset="utf-8">
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -26,7 +27,7 @@
         
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-	            <h1 class="h2">Nuevo Usuario</h1>
+	            <h1 class="h2">Editar Usuario</h1>
 	            <div class="btn-toolbar mb-2 mb-md-0">
 	              <div class="btn-group mr-2">
 	                <a href="../usuarios/" class="btn btn-sm btn-outline-secondary">Volver</a>
@@ -41,14 +42,14 @@
 			                <div class="col-md-6 mb-3">
 			                    <label for="firstName">Nombre</label>
 			                    <input type="text" name="nombre" class="form-control" id="firstName" placeholder="" required="required">
-			                    <div class="invalid-feedback">
+			                    <div class="invalid-feedback" value="Homero">
 			                        Valid first name is required.
 			                    </div>
 			                </div>
 			                <div class="col-md-6 mb-3">
 			                    <label for="lastName">Apellido</label>
 			                    <input type="text" name="apellido" class="form-control" id="lastName" placeholder="" required="required">
-			                    <div class="invalid-feedback">
+			                    <div class="invalid-feedback" value="Simpson">
 			                        Valid last name is required.
 			                    </div>
 			                </div>
@@ -57,15 +58,15 @@
 			            <div class="mb-3">
 			                <label for="email">Email <span class="text-muted">(No es Optional)</span></label>
 			                <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com" required="required">
-			                <div class="invalid-feedback">
+			                <div class="invalid-feedback" value="asd@asd.com">
 			                    Please enter a valid email address for shipping updates.
 			                </div>
 			            </div>
 			
 			            <div class="mb-3">
-			                <label for="password">Contraseña</label>
-			                <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña" required="required">
-			                <div class="invalid-feedback">
+			                <label for="password">ContraseÃ±a</label>
+			                <input type="password" name="password" class="form-control" id="password" placeholder="ContraseÃ±a" required="required">
+			                <div class="invalid-feedback" value="123">
 			                    Please enter your shipping password.
 			                </div>
 			            </div>

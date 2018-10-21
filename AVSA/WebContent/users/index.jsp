@@ -43,6 +43,7 @@
 	                  <th>Header</th>
 	                  <th>Header</th>
 	                  <th>Header</th>
+	                  <th colspan="2">Acciones</th>
 	                </tr>
 	              </thead>
 	              <tbody>
@@ -52,6 +53,8 @@
 	                  <td>ipsum</td>
 	                  <td>dolor</td>
 	                  <td>sit</td>
+	                  <td><a href="../usuarios/modificacion" class="btn btn-sm btn-primary"><span data-feather="edit"></span></a></td>
+	                  <td><a href="../usuarios/baja" class="btn btn-sm btn-danger"><span data-feather="trash"></span></a></td>
 	                </tr>
 	                <tr>
 	                  <td>1,002</td>
@@ -59,6 +62,8 @@
 	                  <td>consectetur</td>
 	                  <td>adipiscing</td>
 	                  <td>elit</td>
+	                  <td><a href="../usuarios/modificacion" class="btn btn-sm btn-primary"><span data-feather="edit"></span></a></td>
+	                  <td><a href="../usuarios/baja" class="btn btn-sm btn-danger"><span data-feather="trash"></span></a></td>
 	                </tr>
 	                <tr>
 	                  <td>1,003</td>
@@ -66,6 +71,18 @@
 	                  <td>nec</td>
 	                  <td>odio</td>
 	                  <td>Praesent</td>
+	                  <td>
+							<form method="post" action="../usuarios/modificacion">
+								<input type="hidden" name="id" value="123">
+								<button type="submit" class="btn btn-sm btn-primary"><span data-feather="edit"></span></button>
+							</form>
+	                  </td>
+	                  <td>
+							<form name="post_5bcbc147ef7a6374751506" style="display:none;" method="post" action="../usuarios/baja">
+								<input type="hidden" name="id" value="123">
+							</form>
+							<a href="#" class="btn btn-sm btn-danger" onclick="if (confirm('¿Seguro que desea eliminar el usuario?')) { document.post_5bcbc147ef7a6374751506.submit(); } event.returnValue = false; return false;"><span data-feather="trash"></span></a>
+				      </td>
 	                </tr>
 	              </tbody>
 	            </table>
