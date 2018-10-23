@@ -78,10 +78,10 @@
 							</form>
 	                  </td>
 	                  <td>
-							<form name="post_5bcbc147ef7a6374751506" style="display:none;" method="post" action="../usuarios/baja">
+							<form name="post_123" style="display:none;" method="post" action="../usuarios/baja">
 								<input type="hidden" name="id" value="123">
 							</form>
-							<a href="#" class="btn btn-sm btn-danger" onclick="if (confirm('¿Seguro que desea eliminar el usuario?')) { document.post_5bcbc147ef7a6374751506.submit(); } event.returnValue = false; return false;"><span data-feather="trash"></span></a>
+							<a href="#" class="btn btn-sm btn-danger" onclick="if (confirm('¿Seguro que desea eliminar el usuario?')) { document.post_123.submit(); } event.returnValue = false; return false;"><span data-feather="trash"></span></a>
 				      </td>
 	                </tr>
 	              </tbody>

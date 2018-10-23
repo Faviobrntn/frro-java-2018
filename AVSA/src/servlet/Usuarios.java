@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entity.Usuario;
+
 /**
  * Servlet implementation class Usuarios
  */
@@ -69,35 +71,40 @@ public class Usuarios extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//doGet(request, response);
 		
 		System.out.println("ENTRO POR POST");
 		System.out.println(request.getPathInfo());
-		System.out.println(request.getParameter("alta"));
-		//System.out.println(request.getParameter(""));
-		if(request.getParameter("alta") != null || request.getPathInfo() == "alta") {
-			guardar(request, response);
-		}
-		if(request.getParameter("baja") != null) {
-			System.out.println("Esta es una Baja");
-			baja(request, response);
-		}
-		if(request.getParameter("modificacion") != null) {
-			System.out.println("Esta es una Modificación");
-			modificacion(request, response);
+		System.out.println(request.getParameter("accion"));
+		
+		switch (request.getPathInfo()) {
+			case "/alta":
+				System.out.println("metodo agregar");
+				//request.getRequestDispatcher("/users/alta.jsp").forward(request, response);
+				this.guardar(request, response);
+				break;
+				
+			case "/baja":
+				//response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through get");
+				this.baja(request, response);
+				break;
+				
+			case "/modificacion":
+				//response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through get");
+				this.modificacion(request, response);
+				break;
 		}
 		
-		request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+		response.sendRedirect("../usuarios/");
+		//request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 	}
 	
 	
-	protected void guardar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+	private void guardar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		for(Entry<String, String[]> entry : request.getParameterMap().entrySet()){
 			System.out.println(entry.getKey()+" - "+entry.getValue()[0]);
 		}
+		//Usuario user = new Usuario();
 		if(request.getParameter("id") != null) {
 			System.out.println("Es una MODIFICACIOOOOON");
 		}else {
@@ -105,9 +112,7 @@ public class Usuarios extends HttpServlet {
 		}
 	}
 	
-	protected void modificacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("MODIFICACIOOOOON");
 		System.out.println(request.getPathInfo());
@@ -115,14 +120,12 @@ public class Usuarios extends HttpServlet {
 		request.getRequestDispatcher("/users/modificacion.jsp").forward(request, response);
 	}
 	
-	protected void baja(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+	private void baja(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("DELETEEEEEE");
 		System.out.println(request.getPathInfo());
 		System.out.println(request.getParameter("id"));
-		request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+		//request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 	}
 	
 }
