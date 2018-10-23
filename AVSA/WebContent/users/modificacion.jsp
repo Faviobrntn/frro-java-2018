@@ -63,13 +63,13 @@
 			                </div>
 			            </div>
 			
-			            <div class="mb-3">
+			            <!--<div class="mb-3">
 			                <label for="password">Contraseña</label>
 			                <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña" required="required">
 			                <div class="invalid-feedback" value="123">
 			                    Please enter your shipping password.
 			                </div>
-			            </div>
+			            </div> -->
 
 				        <hr class="mb-4">
 				        <button class="btn btn-primary btn-lg btn-block" type="submit" name="accion" value="alta">Guardar</button>

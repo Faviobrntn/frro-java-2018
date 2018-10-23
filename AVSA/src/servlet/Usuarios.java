@@ -101,13 +101,21 @@ public class Usuarios extends HttpServlet {
 	
 	
 	private void guardar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		for(Entry<String, String[]> entry : request.getParameterMap().entrySet()){
-			System.out.println(entry.getKey()+" - "+entry.getValue()[0]);
-		}
-		//Usuario user = new Usuario();
+		//for(Entry<String, String[]> entry : request.getParameterMap().entrySet()){
+		//	System.out.println(entry.getKey()+" - "+entry.getValue()[0]);
+		//}
+		Usuario user = new Usuario();
+		user.setApellido(request.getParameter("apellido"));
+		user.setNombre(request.getParameter("nombre"));
+		user.setEmail(request.getParameter("email"));
+		
 		if(request.getParameter("id") != null) {
 			System.out.println("Es una MODIFICACIOOOOON");
+			//user.setId(request.getParameter("id")); TODO hacer ID integer
 		}else {
+			user.setPassword(request.getParameter("password"));
+			
+			//TODO enviar el objeto al controlador
 			System.out.println("Es un ALTA");
 		}
 	}
@@ -117,7 +125,11 @@ public class Usuarios extends HttpServlet {
 		System.out.println("MODIFICACIOOOOON");
 		System.out.println(request.getPathInfo());
 		System.out.println(request.getParameter("id"));
-		request.getRequestDispatcher("/users/modificacion.jsp").forward(request, response);
+		if(request.getParameter("id") != null) {
+			//TODO busqueda de usuario
+			request.getRequestDispatcher("/users/modificacion.jsp").forward(request, response);
+		}
+		
 	}
 	
 	private void baja(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
