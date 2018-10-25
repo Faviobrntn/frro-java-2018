@@ -56,27 +56,47 @@ public class Categorias extends HttpServlet {
 
 		switch (request.getPathInfo()) {
 			case "/alta":
-				System.out.println("metodo agregar");
 				try {
 					this.alta(request, response);
+					response.sendRedirect("../categorias/");
 				} catch (Exception e) {
 					e.printStackTrace();
-					response.getWriter().append("Excepcion: ");
 				}
 				break;
 				
 			case "/baja":
 				//response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through get");
-				this.baja(request, response);
+				try {
+					this.baja(request, response);
+					response.sendRedirect("../categorias/");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 				
 			case "/modificacion":
 				//response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through get");
-				this.modificacion(request, response);
+				try {
+					this.modificacion(request, response);
+					request.getRequestDispatcher("/categories/modificacion.jsp").forward(request, response);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
+			
+			case "/modificar":
+				//response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through get");
+				try {
+					this.modificar(request, response);
+					response.sendRedirect("../categorias/");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 		}
-	
-		response.sendRedirect("../categorias/");
 	}
 	
 	
@@ -93,12 +113,40 @@ public class Categorias extends HttpServlet {
 			
 	}
 	
-	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("MODIFICACIOOOOON");
+		
+		try {
+			Categoria categ = new Categoria();
+			categ.setId(Integer.parseInt(request.getParameter("id")));
+			
+			CtrlABMCategoria ctrlCategoria = new CtrlABMCategoria();
+			request.setAttribute("categoria", ctrlCategoria.getById(categ));
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 	
-	private void baja(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("DELETEEEEEE");
+	private void modificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("MODIFICAR");
+		
+		Categoria categ = new Categoria();
+		categ.setId(Integer.parseInt(request.getParameter("id")));
+		categ.setNombre(request.getParameter("nombre"));
+		categ.setDescripcion(request.getParameter("descripcion"));
+		
+		CtrlABMCategoria ctrlCategoria = new CtrlABMCategoria();
+		ctrlCategoria.update(categ);
+	}
+	
+	private void baja(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("ELIMINAR");
+		
+		Categoria categ = new Categoria();
+		categ.setId(Integer.parseInt(request.getParameter("id")));
+		
+		CtrlABMCategoria ctrlCategoria = new CtrlABMCategoria();
+		ctrlCategoria.delete(categ);
 	}
 
 }

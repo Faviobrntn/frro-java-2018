@@ -44,7 +44,7 @@
 					        <form action="../categorias/alta" method="post" class="needs-validation">
 				                <div class="form-group">
 				                    <label for="nombre">Nombre</label>
-				                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre" required="required">
+				                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre" required="required" autocomplete="off">
 				                    <div class="invalid-feedback">
 				                        El nombre es obligatorio.
 				                    </div>
@@ -68,7 +68,7 @@
 			                  <th>#</th>
 			                  <th>Nombre</th>
 			                  <th>Descripción</th>
-			                  <th colspan="2">Acciones</th>
+			                  <th colspan="2" class="text-center">Acciones</th>
 			                </tr>
 			              </thead>
 			              
@@ -81,7 +81,13 @@
 			                  	<td><%=c.getId() %></td>
 			                  	<td><%=c.getNombre() %></td>
 								<td><%=c.getDescripcion() %></td>
-			                  	<td><a href="../categorias/modificacion" class="btn btn-sm btn-primary"><span data-feather="edit"></span></a></td>
+			                  	<td>
+									<form method="post" action="../categorias/modificacion">
+										<input type="hidden" name="id" value="<%=c.getId() %>">
+										<button type="submit" class="btn btn-sm btn-primary"><span data-feather="edit"></span></button>
+									</form>
+				                </td>
+			                  	
 			                  	<td>
 									<form name="post_<%=c.getId() %>" style="display:none;" method="post" action="../categorias/baja">
 										<input type="hidden" name="id" value="<%=c.getId() %>">
@@ -90,23 +96,6 @@
 						      	</td>
 			                </tr>
 			                <% } %>
-			                <tr>
-			                  <td>2</td>
-			                  <td>Lorem</td>
-			                  <td>nec</td>
-			                  <td>
-									<form method="post" action="../categorias/modificacion">
-										<input type="hidden" name="id" value="123">
-										<button type="submit" class="btn btn-sm btn-primary"><span data-feather="edit"></span></button>
-									</form>
-			                  </td>
-			                  <td>
-									<form name="post_123" style="display:none;" method="post" action="../categorias/baja">
-										<input type="hidden" name="id" value="123">
-									</form>
-									<a href="#" class="btn btn-sm btn-danger" onclick="if (confirm('¿Seguro que desea eliminar la categoria?')) { document.post_123.submit(); } event.returnValue = false; return false;"><span data-feather="trash"></span></a>
-						      </td>
-			                </tr>
 			              </tbody>
 			            </table>
 			        </div>

@@ -18,23 +18,15 @@ public class CtrlABMCategoria {
 	}
 	
 	public void delete(Categoria u)throws Exception{
-		
+		dataCateg.delete(u);
 	}
 	
 	public void update(Categoria u)throws Exception{
-		
+		dataCateg.update(u);
 	}
 	
-	public Categoria getCategoria(Categoria u) throws Exception{
-		return new Categoria();
-	}
-	
-	public Categoria getByCategoria(String categoria)throws Exception{
-		return new Categoria();
-	}
-	
-	public Categoria getByNombre(Categoria u) throws Exception{
-		return new Categoria();	
+	public Categoria getById(Categoria u) throws Exception{
+		return dataCateg.getById(u);
 	}
 	
 	public ArrayList<Categoria> getAll()throws Exception{

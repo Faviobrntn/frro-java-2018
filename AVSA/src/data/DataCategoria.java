@@ -47,6 +47,40 @@ public class DataCategoria {
 	}
 	
 	
+	public Categoria getById(Categoria categoria) throws Exception{
+		
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Categoria c = null;
+		try{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT * FROM categorias WHERE id=?");
+			stmt.setInt(1, categoria.getId());
+			
+			rs=stmt.executeQuery();
+			
+			if(rs!=null && rs.next()){
+				c = new Categoria();
+				c.setId(rs.getInt("id"));
+				c.setNombre(rs.getString("nombre"));
+				c.setDescripcion(rs.getString("descripcion"));
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		} finally{
+			try {
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		return c;
+	}
+	
+	
 	public void add(Categoria p) throws Exception{
 		PreparedStatement stmt=null;
 		ResultSet keyResultSet=null;
@@ -77,4 +111,58 @@ public class DataCategoria {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	public void delete(Categoria categoria) throws Exception{
+		PreparedStatement stmt=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn()
+				.prepareStatement(
+					"DELETE FROM categorias WHERE id=?"
+				);
+			stmt.setInt(1, categoria.getId());
+			stmt.executeUpdate();
+		} catch (SQLException | AppDataException e) {
+			throw e;
+		}
+		try {
+			if(stmt!=null)stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	public void update(Categoria categoria) throws Exception{
+		PreparedStatement stmt=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn()
+					.prepareStatement(
+						"UPDATE categorias SET nombre=?, descripcion=? WHERE id=?"
+					);
+
+			stmt.setString(1, categoria.getNombre());
+			stmt.setString(2, categoria.getDescripcion());
+			stmt.setInt(3, categoria.getId());
+			
+			stmt.executeUpdate();
+			
+		} catch (SQLException | AppDataException e) {
+			throw e;
+		}
+		try {
+			if(stmt!=null)stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
 }
