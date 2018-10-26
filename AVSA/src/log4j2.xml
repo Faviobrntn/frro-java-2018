@@ -7,16 +7,16 @@
                 %highlight{%-5level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green}
                 %message%n"/>
         </Console>
-        <File name="ERROR" fileName="${sys:catalina.home}/logs/Ej10-error.log" append="true">
+        <File name="ERROR" fileName="${sys:catalina.home}/logs/error.log" append="true">
             <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | %C{2} (%F:%L) - %m%n"/>
         </File>
-        <File name="DEBUG" fileName="${sys:catalina.home}/logs/Ej10-debug.log" append="true">
+        <File name="DEBUG" fileName="${sys:catalina.home}/logs/debug.log" append="true">
             <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | %C{2} (%F:%L) - %m%n"/>
         </File>
-        <File name="TRACE" fileName="${sys:catalina.home}/logs/Ej10-trace.log" append="true">
+        <File name="TRACE" fileName="${sys:catalina.home}/logs/trace.log" append="true">
             <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | %C{2} (%F:%L) - %m%n"/>
         </File>
-        <File name="SERVLETS" fileName="${sys:catalina.home}/logs/Ej10-servlet-info.log" append="true">
+        <File name="SERVLETS" fileName="${sys:catalina.home}/logs/servlet-info.log" append="true">
             <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | %C{2} (%F:%L) - %m%n"/>
         </File>
     </Appenders>
