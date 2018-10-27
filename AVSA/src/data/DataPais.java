@@ -4,8 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.PreparedStatement;
 
 import entity.Pais;
+import util.AppDataException;
 
 public class DataPais {
 	
@@ -41,4 +43,116 @@ public class DataPais {
 			return paises;
 	}
 
+	public Pais getById(Pais pais) throws Exception{
+		
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Pais p = null;
+		try{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT * FROM paises WHERE id=?");
+			stmt.setInt(1, pais.getId());
+			
+			rs=stmt.executeQuery();
+			
+			if(rs!=null && rs.next()){
+				p = new Pais();
+				p.setId(rs.getInt("id"));
+				p.setNombre(rs.getString("nombre"));
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		} finally{
+			try {
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		return p;
+	}
+	
+	
+	public void add(Pais p) throws Exception{
+		PreparedStatement stmt=null;
+		ResultSet keyResultSet=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn()
+					.prepareStatement(
+						"INSERT INTO paises(nombre) values (?)",
+						PreparedStatement.RETURN_GENERATED_KEYS
+					);
+			stmt.setString(1, p.getNombre());
+			stmt.executeUpdate();
+			keyResultSet = stmt.getGeneratedKeys();
+			
+			if(keyResultSet!=null && keyResultSet.next()){
+				p.setId(keyResultSet.getInt(1));
+			}
+
+		} catch (SQLException | AppDataException e) {
+			throw e;
+		}
+		
+		try {
+			if(keyResultSet!=null)keyResultSet.close();
+			if(stmt!=null)stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	public void delete(Pais pais) throws Exception{
+		PreparedStatement stmt=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn()
+				.prepareStatement(
+					"DELETE FROM paises WHERE id=?"
+				);
+			stmt.setInt(1, pais.getId());
+			stmt.executeUpdate();
+		} catch (SQLException | AppDataException e) {
+			throw e;
+		}
+		try {
+			if(stmt!=null)stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	public void update(Pais pais) throws Exception{
+		PreparedStatement stmt=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn()
+					.prepareStatement(
+						"UPDATE paises SET nombre=? WHERE id=?"
+					);
+
+			stmt.setString(1, pais.getNombre());
+			stmt.setInt(2, pais.getId());
+			
+			stmt.executeUpdate();
+			
+		} catch (SQLException | AppDataException e) {
+			throw e;
+		}
+		try {
+			if(stmt!=null)stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
