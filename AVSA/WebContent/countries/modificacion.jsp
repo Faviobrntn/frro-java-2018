@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Usuarios - agregar</title>
+    <title>Paises - agregar</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../styles/bootstrap.min.css" rel="stylesheet">

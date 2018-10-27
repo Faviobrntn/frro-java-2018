@@ -1,6 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entity.Pais"%>
-<% ArrayList<Pais> country = (ArrayList<Pais>) request.getAttribute("paises");%>
+<% ArrayList<Pais> country = (ArrayList<Pais>) request.getAttribute("paises"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
