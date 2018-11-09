@@ -19,8 +19,20 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<%= url %>categorias/">
-                    <span data-feather="file"></span>
+                    <span data-feather="archive"></span>
                     Categorias
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%= url %>paises/">
+                    <span data-feather="database"></span>
+                    Paises
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%= url %>monedas/">
+                    <span data-feather="dollar-sign"></span>
+                    Monedas
                 </a>
             </li>
             <li class="nav-item">

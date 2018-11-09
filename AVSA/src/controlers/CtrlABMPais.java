@@ -6,7 +6,8 @@ import data.DataPais;
 import entity.Pais;
 
 public class CtrlABMPais {
-private DataPais dataP;
+	
+	private DataPais dataP;
 	
 	public CtrlABMPais(){
 		dataP = new DataPais();
