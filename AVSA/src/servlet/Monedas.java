@@ -71,57 +71,19 @@ public class Monedas extends HttpServlet {
 			}
 			break;
 			
-		case "/modificacion":
-			try {
-				this.modificacion(request, response);
-				request.getRequestDispatcher("/money/modificacion.jsp").forward(request, response);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			break;
-		
 		case "/modificar":
 			try {
 				this.modificar(request, response);
-				response.sendRedirect("../monedas/");
+				response.getWriter().println(true);
+				//response.sendRedirect("../monedas/");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				response.getWriter().println(e.toString());
+
 			}
 			break;
 		}
 	}
-	
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		response.setContentType( "text/html; charset=iso-8859-1" );
-		PrintWriter out = response.getWriter();
-		//JSONArray arrayObj=new JSONArray();
-
-		// Obtengo los datos de la peticion
-		String nombre = request.getParameter("nombre");
-
-		// Compruebo que los campos del formulario tienen datos para añadir a la tabla
-		if (!nombre.equals("")) {
-			Moneda pai = new Moneda();
-			pai.setId(Integer.parseInt(request.getParameter("id")));
-			pai.setNombre(request.getParameter("nombre"));
-			
-			CtrlABMMoneda ctrlMoneda = new CtrlABMMoneda();
-			try {
-				ctrlMoneda.update(pai);
-				//arrayObj.put(true);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		//out.println("</table>");
-		out.println(true);
-		out.close();
-
-	}
 	
 	
 	private void alta(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -134,27 +96,15 @@ public class Monedas extends HttpServlet {
 			
 	}
 	
-	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		try {
-			Moneda pai = new Moneda();
-			pai.setId(Integer.parseInt(request.getParameter("id")));
-			
-			CtrlABMMoneda ctrlPais = new CtrlABMMoneda();
-			request.setAttribute("pais", ctrlPais.getById(pai));
-		} catch (Exception e) {
-			throw e;
-		}
-	}
 	
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		Moneda pai = new Moneda();
-		pai.setId(Integer.parseInt(request.getParameter("id")));
-		pai.setNombre(request.getParameter("nombre"));
+		Moneda coin = new Moneda();
+		coin.setId(Integer.parseInt(request.getParameter("id")));
+		coin.setNombre(request.getParameter("nombre"));
 		
 		CtrlABMMoneda ctrlMoneda = new CtrlABMMoneda();
-		ctrlMoneda.update(pai);
+		ctrlMoneda.update(coin);
 	}
 	
 	

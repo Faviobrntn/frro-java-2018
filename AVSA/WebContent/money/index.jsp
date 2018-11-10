@@ -99,7 +99,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../js/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../jquery-slim.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="../jquery.min.js"><\/script>')</script>
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 	
@@ -108,30 +108,34 @@
 		$(document).ready(function(){
 			$(".btnModificarMoneda").on('click', function(e){
 				e.preventDefault();
+				var _this = $(this);
 				var id = $(this).data('id');
 				var nombre = $(this).data('nombre');
 				var campo = $("#coin-"+id);
 				
 				var nuevo_nombre = prompt("Ingrese el nuevo nombre", nombre);
-				if(nuevo_nombre.trim() != "" && nuevo_nombre.trim() != nombre){
+				
+				if(nuevo_nombre != null && nuevo_nombre.trim() != "" && nuevo_nombre.trim() != nombre){
 					$.ajax({
-			            type:'PUT',
+			            type: 'POST',
 			            url: "../monedas/modificar",
-			            data:{ 
+			            data: { 
 			            	id: id,
 			            	nombre: nuevo_nombre
 			            },
 			            dataType: "json",
-			            success: (data) => {
+			            success: function(data) {
 			            	console.log(data);
-			                if(data.estado){
-			                	campo.html(nombre_nuevo);
+			                if(data == true){
+			                	campo.html(nuevo_nombre);
+			                	_this.data('nombre', nuevo_nombre);
 			                }else{
-			                    alert("No se pudo modificar el nombre de la moneda.");
+			                    //alert("No se pudo modificar el nombre de la moneda.");
+			                    alert(data);
 			                    campo.html(nombre);
 			                }
 			            },
-			            error: (data) => {
+			            error: function(data) {
 			                console.error(data);
 			            }
 			        });
