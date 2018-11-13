@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controlers.CtrlABMMoneda;
 import controlers.CtrlABMPais;
+import entity.Moneda;
 import entity.Pais;
 
 /**
@@ -31,14 +33,18 @@ public class Paises extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try {
 			CtrlABMPais ctrlPais = new CtrlABMPais();
 			
 			ArrayList<Pais> paises = ctrlPais.getAll();
-			
+
 			//request.getSession().setAttribute("orderToShow", order);
 			request.setAttribute("paises", paises);
+			
+			//Armo un ArrayList para el select
+			CtrlABMMoneda ctrlMoneda = new CtrlABMMoneda();
+			ArrayList<Moneda> monedas = ctrlMoneda.getAll();
+			request.setAttribute("monedas", monedas);
 			
 			request.getRequestDispatcher("/countries/index.jsp").forward(request, response);
 			
@@ -64,7 +70,6 @@ public class Paises extends HttpServlet {
 			break;
 			
 		case "/baja":
-			//response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through get");
 			try {
 				this.baja(request, response);
 				response.sendRedirect("../paises/");
@@ -75,7 +80,6 @@ public class Paises extends HttpServlet {
 			break;
 			
 		case "/modificacion":
-			//response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through get");
 			try {
 				this.modificacion(request, response);
 				request.getRequestDispatcher("/countries/modificacion.jsp").forward(request, response);
@@ -86,7 +90,6 @@ public class Paises extends HttpServlet {
 			break;
 		
 		case "/modificar":
-			//response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through get");
 			try {
 				this.modificar(request, response);
 				response.sendRedirect("../paises/");
@@ -98,50 +101,69 @@ public class Paises extends HttpServlet {
 	}
 }
 	private void alta(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		System.out.println("Es un ALTA");
-		Pais pai = new Pais();
-		pai.setNombre(request.getParameter("nombre"));
-
-		
-		CtrlABMPais ctrlPais = new CtrlABMPais();
-		ctrlPais.add(pai);
+		try {
+			Pais pai = new Pais();
+			pai.setNombre(request.getParameter("nombre"));
 			
+			Moneda money = new Moneda();
+			money.setId(Integer.parseInt(request.getParameter("id_moneda")));
+			
+			pai.setMoneda(money);
+			
+			CtrlABMPais ctrlPais = new CtrlABMPais();
+			ctrlPais.add(pai);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 	
-	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("MODIFICACION");
-		
+	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws Exception {		
 		try {
 			Pais pai = new Pais();
 			pai.setId(Integer.parseInt(request.getParameter("id")));
 			
 			CtrlABMPais ctrlPais = new CtrlABMPais();
 			request.setAttribute("pais", ctrlPais.getById(pai));
+			
+			//Armo un Array comun para le select
+			CtrlABMMoneda ctrlMoneda = new CtrlABMMoneda();
+			ArrayList<Moneda> monedas = ctrlMoneda.getAll();
+			request.setAttribute("monedas", monedas);
+			
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 	
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("MODIFICAR");
-		
-		Pais pai = new Pais();
-		pai.setId(Integer.parseInt(request.getParameter("id")));
-		pai.setNombre(request.getParameter("nombre"));
-		
-		CtrlABMPais ctrlPais = new CtrlABMPais();
-		ctrlPais.update(pai);
+		try {
+			
+			Pais pai = new Pais();
+			pai.setId(Integer.parseInt(request.getParameter("id")));
+			pai.setNombre(request.getParameter("nombre"));
+			
+			Moneda money = new Moneda();
+			money.setId(Integer.parseInt(request.getParameter("id_moneda")));
+			
+			pai.setMoneda(money);
+			
+			CtrlABMPais ctrlPais = new CtrlABMPais();
+			ctrlPais.update(pai);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 	
 	private void baja(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("ELIMINAR");
-		
-		Pais pai = new Pais();
-		pai.setId(Integer.parseInt(request.getParameter("id")));
-		
-		CtrlABMPais ctrlPais = new CtrlABMPais();
-		ctrlPais.delete(pai);
+		try {
+			Pais pai = new Pais();
+			pai.setId(Integer.parseInt(request.getParameter("id")));
+			
+			CtrlABMPais ctrlPais = new CtrlABMPais();
+			ctrlPais.delete(pai);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

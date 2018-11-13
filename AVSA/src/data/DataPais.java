@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 
+import entity.Moneda;
 import entity.Pais;
 import util.AppDataException;
 
@@ -19,12 +20,17 @@ public class DataPais {
 			try{
 				stmt = FactoryConexion.getInstancia()
 						.getConn().createStatement();
-				rs = stmt.executeQuery("select * from paises");
+				rs = stmt.executeQuery("SELECT * FROM paises p INNER JOIN monedas m on p.id_moneda = m.id");
 				if(rs!=null){
 					while(rs.next()){
 						Pais p=new Pais();
-						p.setId(rs.getInt("id"));
-						p.setNombre(rs.getString("nombre"));
+						p.setMoneda(new Moneda());
+						p.setId(rs.getInt("p.id"));
+						p.setNombre(rs.getString("p.nombre"));
+						
+						p.getMoneda().setId(rs.getInt("m.id"));
+						p.getMoneda().setNombre(rs.getString("m.nombre"));
+						
 						paises.add(p);
 					}
 				}
@@ -50,15 +56,19 @@ public class DataPais {
 		Pais p = null;
 		try{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT * FROM paises WHERE id=?");
+					"SELECT * FROM paises p INNER JOIN monedas m on p.id_moneda = m.id WHERE p.id=?");
 			stmt.setInt(1, pais.getId());
 			
 			rs=stmt.executeQuery();
 			
 			if(rs!=null && rs.next()){
 				p = new Pais();
-				p.setId(rs.getInt("id"));
-				p.setNombre(rs.getString("nombre"));
+				p.setMoneda(new Moneda());
+				p.setId(rs.getInt("p.id"));
+				p.setNombre(rs.getString("p.nombre"));
+				
+				p.getMoneda().setId(rs.getInt("m.id"));
+				p.getMoneda().setNombre(rs.getString("m.nombre"));
 			}
 			
 		} catch (Exception e) {
@@ -82,10 +92,11 @@ public class DataPais {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-						"INSERT INTO paises(nombre) values (?)",
+						"INSERT INTO paises(nombre, id_moneda) values (?, ?)",
 						PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			stmt.setString(1, p.getNombre());
+			stmt.setInt(2, p.getMoneda().getId());
 			stmt.executeUpdate();
 			keyResultSet = stmt.getGeneratedKeys();
 			
@@ -136,11 +147,12 @@ public class DataPais {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-						"UPDATE paises SET nombre=? WHERE id=?"
+						"UPDATE paises SET nombre=?, id_moneda=? WHERE id=?"
 					);
 
 			stmt.setString(1, pais.getNombre());
-			stmt.setInt(2, pais.getId());
+			stmt.setInt(2, pais.getMoneda().getId());
+			stmt.setInt(3, pais.getId());
 			
 			stmt.executeUpdate();
 			

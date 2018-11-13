@@ -1,5 +1,9 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Pais"%>
+<% ArrayList<Pais> paises = (ArrayList<Pais>) request.getAttribute("paises"); %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -63,12 +67,31 @@
 			            </div>
 			
 			            <div class="mb-3">
-			                <label for="password">Contraseña</label>
-			                <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña" required="required">
+			                <label for="password">ContraseÃ±a</label>
+			                <input type="password" name="password" class="form-control" id="password" placeholder="ContraseÃ±a" required="required">
 			                <div class="invalid-feedback">
 			                    Please enter your shipping password.
 			                </div>
 			            </div>
+			            
+			            <div class="form-group">
+		                    <label for="pais_id">Pais</label>
+		                    <select name="id_pais" class="form-control" id="pais_id" required="required">
+		                    	<option value="">Seleccione pais</option>
+		                    	<% for(Pais p : paises){ %>
+		                    		<option value="<%= p.getId() %>"><%= p.getNombre() %></option>
+								<% } %>
+		                    </select>
+		                </div>
+						
+						<div class="form-group">
+		                    <label for="rol">Rol</label>
+		                    <select name="rol" class="form-control" id="rol" required="required">
+		                    	<option value="">Seleccione el rol</option>
+		                    	<option value="administrador">Administrador</option>
+		                    	<option value="usuario">Usuario</option>
+		                    </select>
+		                </div>		                
 
 				        <hr class="mb-4">
 				        <button class="btn btn-primary btn-lg btn-block" type="submit" name="accion" value="alta">Guardar</button>

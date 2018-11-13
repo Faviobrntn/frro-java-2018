@@ -9,6 +9,7 @@ public class Usuario implements Serializable{
 	private String nombre;
 	private String apellido;
 	private String email;
+	private String rol;
 	private Pais pais;
 	
 	public int getId() {
@@ -47,6 +48,13 @@ public class Usuario implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getRol() {
+		return rol;
+	}
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+	
 	public Pais getPais() {
 		return pais;
 	}

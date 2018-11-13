@@ -1,5 +1,8 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="entity.Pais"%>
 <% Pais pais = (Pais) request.getAttribute("pais"); %>
+<%@page import="entity.Moneda"%>
+<% ArrayList<Moneda> monedas = (ArrayList<Moneda>) request.getAttribute("monedas"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
   <head>
@@ -9,7 +12,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Paises - agregar</title>
+    <title>Paises - Modificar</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../styles/bootstrap.min.css" rel="stylesheet">
@@ -31,14 +34,14 @@
 	            <h1 class="h2">Editar Paises</h1>
 	            <div class="btn-toolbar mb-2 mb-md-0">
 	              <div class="btn-group mr-2">
-	                <a href="../categorias/" class="btn btn-sm btn-outline-secondary">Volver</a>
+	                <a href="../paises/" class="btn btn-sm btn-outline-secondary">Volver</a>
 	              </div>
 	            </div>
 	        </div>
 	        <div class="row">    
 			    <div class="col-md-8">
 			        <h4 class="mb-3">Complete el formulario</h4>
-			        <form action="../categorias/modificar" method="post" class="needs-validation">
+			        <form action="../paises/modificar" method="post" class="needs-validation">
 			        	<input type="hidden" name="id" value="<%=pais.getId()%>">
 		                <div class="form-group">
 		                    <label for="nombre">Nombre</label>
@@ -46,6 +49,19 @@
 		                    <div class="invalid-feedback">
 		                        El nombre es obligatorio.
 		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="moneda_id">Moneda</label>
+		                    <select name="id_moneda" class="form-control" id="moneda_id" required="required">
+		                    	<option value="">Seleccione moneda</option>
+		                    	<% for(Moneda m : monedas){ %>
+		                    		<% if(pais.getMoneda().getId() == m.getId()){ %>
+		                    		<option value="<%= m.getId() %>" selected><%= m.getNombre() %></option>
+		                    		<% }else{ %>
+		                    		<option value="<%= m.getId() %>"><%= m.getNombre() %></option>
+		                    		<% } %>
+								<% } %>
+		                    </select>
 		                </div>
 				        <hr class="mb-4">
 				        <button class="btn btn-primary btn-lg btn-block" type="submit" name="accion" value="modificar">Guardar</button>

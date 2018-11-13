@@ -1,5 +1,9 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Usuario"%>
+<% ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios"); %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -39,51 +43,38 @@
 	              <thead>
 	                <tr class="active">
 	                  <th>#</th>
-	                  <th>Header</th>
-	                  <th>Header</th>
-	                  <th>Header</th>
-	                  <th>Header</th>
-	                  <th colspan="2">Acciones</th>
+	                  <th>Nombre</th>
+	                  <th>Apellido</th>
+	                  <th>Email</th>
+	                  <th>Pais</th>
+	                  <th>Rol</th>
+	                  <th colspan="2" class="text-center">Acciones</th>
 	                </tr>
 	              </thead>
 	              <tbody>
+	              <% for(Usuario u : usuarios){ %>
 	                <tr>
-	                  <td>1,001</td>
-	                  <td>Lorem</td>
-	                  <td>ipsum</td>
-	                  <td>dolor</td>
-	                  <td>sit</td>
-	                  <td><a href="../usuarios/modificacion" class="btn btn-sm btn-primary"><span data-feather="edit"></span></a></td>
-	                  <td><a href="../usuarios/baja" class="btn btn-sm btn-danger"><span data-feather="trash"></span></a></td>
-	                </tr>
-	                <tr>
-	                  <td>1,002</td>
-	                  <td>amet</td>
-	                  <td>consectetur</td>
-	                  <td>adipiscing</td>
-	                  <td>elit</td>
-	                  <td><a href="../usuarios/modificacion" class="btn btn-sm btn-primary"><span data-feather="edit"></span></a></td>
-	                  <td><a href="../usuarios/baja" class="btn btn-sm btn-danger"><span data-feather="trash"></span></a></td>
-	                </tr>
-	                <tr>
-	                  <td>1,003</td>
-	                  <td>Integer</td>
-	                  <td>nec</td>
-	                  <td>odio</td>
-	                  <td>Praesent</td>
-	                  <td>
+	                  	<td><%= u.getId() %></td>
+	                  	<td><%= u.getNombre() %></td>
+	                  	<td><%= u.getApellido() %></td>
+	                  	<td><%= u.getEmail() %></td>
+	                  	<td><%= u.getPais().getNombre() %></td>
+	                  	<td><%= u.getRol() %></td>
+	                  	<td class="text-center">
 							<form method="post" action="../usuarios/modificacion">
-								<input type="hidden" name="id" value="123">
+								<input type="hidden" name="id" value="<%=u.getId() %>">
 								<button type="submit" class="btn btn-sm btn-primary"><span data-feather="edit"></span></button>
 							</form>
-	                  </td>
-	                  <td>
-							<form name="post_123" style="display:none;" method="post" action="../usuarios/baja">
-								<input type="hidden" name="id" value="123">
+		                </td>
+	                  	
+	                  	<td class="text-center">
+							<form name="post_<%=u.getId()%>" style="display:none;" method="post" action="../usuarios/baja">
+								<input type="hidden" name="id" value="<%=u.getId()%>">
 							</form>
-							<a href="#" class="btn btn-sm btn-danger" onclick="if (confirm('¿Seguro que desea eliminar el usuario?')) { document.post_123.submit(); } event.returnValue = false; return false;"><span data-feather="trash"></span></a>
-				      </td>
+							<a href="#" class="btn btn-sm btn-danger" onclick="if (confirm('Â¿Seguro que desea eliminar al usuario?')) { document.post_<%=u.getId() %>.submit(); } event.returnValue = false; return false;"><span data-feather="trash"></span></a>
+				      	</td>
 	                </tr>
+	                <% } %>
 	              </tbody>
 	            </table>
 	        </div>

@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.Map.Entry;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controlers.CtrlABMPais;
+import controlers.CtrlABMUsuario;
+import entity.Pais;
 import entity.Usuario;
 
 /**
@@ -30,105 +33,136 @@ public class Usuarios extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-		response.setDateHeader("Expires", 0); // Proxies.
-		
-		System.out.println(request.getPathInfo());
-		
-		//request.setAttribute("variable", "valor del parametro");
-		if(request.getPathInfo() == null) {
-			request.getRequestDispatcher("/users/index.jsp").forward(request, response);
-		}else {
+		try {
+			System.out.println(request.getPathInfo());
 			switch (request.getPathInfo()) {
 				case "/alta":
-					System.out.println("metodo agregar");
-					request.getRequestDispatcher("/users/alta.jsp").forward(request, response);
-					break;
-					
-				case "/baja":
-					response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through get");
-					break;
-					
-				case "/modificacion":
-					response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through get");
-					break;
-				
-				case "/":
-					request.getRequestDispatcher("/users/index.jsp").forward(request, response);
-					break;
-					
-				default:
-					request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+					try {
+						//Armo un ArrayList para el select
+						CtrlABMPais ctrlPais = new CtrlABMPais();
+						ArrayList<Pais> paises = ctrlPais.getAll();
+						request.setAttribute("paises", paises);
+						request.getRequestDispatcher("/users/alta.jsp").forward(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					break;
 			}
+			
+			CtrlABMUsuario ctrlUser = new CtrlABMUsuario();			
+			ArrayList<Usuario> usuarios = ctrlUser.getAll();
+			request.setAttribute("usuarios", usuarios);
+
+			request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		//request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//doGet(request, response);
-		
-		System.out.println("ENTRO POR POST");
-		System.out.println(request.getPathInfo());
-		System.out.println(request.getParameter("accion"));
 		
 		switch (request.getPathInfo()) {
-			case "/alta":
-				System.out.println("metodo agregar");
-				//request.getRequestDispatcher("/users/alta.jsp").forward(request, response);
-				this.guardar(request, response);
-				break;
-				
-			case "/baja":
-				//response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through get");
+		case "/alta":
+			try {
+				this.alta(request, response);
+				response.sendRedirect("../usuarios/");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		case "/baja":
+			try {
 				this.baja(request, response);
-				break;
-				
-			case "/modificacion":
-				//response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through get");
+				response.sendRedirect("../usuarios/");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+		case "/modificacion":
+			try {
 				this.modificacion(request, response);
-				break;
-		}
+				request.getRequestDispatcher("/users/modificacion.jsp").forward(request, response);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
 		
-		response.sendRedirect("../usuarios/");
-		//request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+		case "/modificar":
+			try {
+				this.modificar(request, response);
+				response.sendRedirect("../usuarios/");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		}
 	}
 	
 	
-	private void guardar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//for(Entry<String, String[]> entry : request.getParameterMap().entrySet()){
-		//	System.out.println(entry.getKey()+" - "+entry.getValue()[0]);
-		//}
+	private void alta(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		Usuario user = new Usuario();
 		user.setApellido(request.getParameter("apellido"));
 		user.setNombre(request.getParameter("nombre"));
 		user.setEmail(request.getParameter("email"));
+		user.setPassword(request.getParameter("password"));
+		user.setRol(request.getParameter("rol"));
 		
-		if(request.getParameter("id") != null) {
-			System.out.println("Es una MODIFICACIOOOOON");
-			//user.setId(request.getParameter("id")); TODO hacer ID integer
-		}else {
-			user.setPassword(request.getParameter("password"));
-			
-			//TODO enviar el objeto al controlador
-			System.out.println("Es un ALTA");
-		}
+		Pais pais = new Pais();
+		pais.setId(Integer.parseInt(request.getParameter("id_pais")));
+		
+		user.setPais(pais);
+		
+		CtrlABMUsuario ctrlUsuario = new CtrlABMUsuario();
+		ctrlUsuario.add(user);
+		
 	}
 	
-	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	
+	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		System.out.println("MODIFICACIOOOOON");
-		System.out.println(request.getPathInfo());
-		System.out.println(request.getParameter("id"));
-		if(request.getParameter("id") != null) {
-			//TODO busqueda de usuario
-			request.getRequestDispatcher("/users/modificacion.jsp").forward(request, response);
-		}
+		Usuario user = new Usuario();
+		user.setId(Integer.parseInt(request.getParameter("id")));
+		
+		CtrlABMUsuario ctrlUser = new CtrlABMUsuario();			
+		request.setAttribute("usuario", ctrlUser.getById(user));
+		
+		//Armo un Array comun para le select
+		CtrlABMPais ctrlPais = new CtrlABMPais();
+		ArrayList<Pais> paises = ctrlPais.getAll();
+		request.setAttribute("paises", paises);
+		
+	}
+	
+	
+	private void modificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		Usuario user = new Usuario();
+		user.setId(Integer.parseInt(request.getParameter("id")));
+		user.setApellido(request.getParameter("apellido"));
+		user.setNombre(request.getParameter("nombre"));
+		user.setEmail(request.getParameter("email"));
+		user.setRol(request.getParameter("rol"));
+		
+		Pais pais = new Pais();
+		pais.setId(Integer.parseInt(request.getParameter("id_pais")));
+		
+		user.setPais(pais);
+		
+		CtrlABMUsuario ctrlUsuario = new CtrlABMUsuario();
+		ctrlUsuario.update(user);
 		
 	}
 	

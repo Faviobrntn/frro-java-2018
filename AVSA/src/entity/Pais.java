@@ -3,6 +3,7 @@ package entity;
 public class Pais {
 	private int id;
 	private String nombre;
+	private Moneda moneda;
 	
 	public int getId() {
 		return id;
@@ -16,6 +17,14 @@ public class Pais {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public Moneda getMoneda() {
+		return moneda;
+	}
+	public void setMoneda(Moneda moneda) {
+		this.moneda = moneda;
+	}
+	
 	
 	@Override
 	public String toString(){

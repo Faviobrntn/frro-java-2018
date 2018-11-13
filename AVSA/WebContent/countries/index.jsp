@@ -1,6 +1,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entity.Pais"%>
+<%@page import="entity.Moneda"%>
 <% ArrayList<Pais> country = (ArrayList<Pais>) request.getAttribute("paises"); %>
+<% ArrayList<Moneda> monedas = (ArrayList<Moneda>) request.getAttribute("monedas"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -49,6 +51,15 @@
 				                        El nombre es obligatorio.
 				                    </div>
 				                </div>
+				                <div class="form-group">
+				                    <label for="moneda_id">Moneda</label>
+				                    <select name="id_moneda" class="form-control" id="moneda_id" required="required">
+				                    	<option value="">Seleccione moneda</option>
+				                    	<% for(Moneda m : monedas){ %>
+				                    		<option value="<%= m.getId() %>"><%= m.getNombre() %></option>
+										<% } %>
+				                    </select>
+				                </div>
 						        <hr class="mb-4">
 						        <button class="btn btn-primary btn-lg btn-block" type="submit" name="accion" value="alta">Guardar</button>
 					    	</form>
@@ -63,18 +74,19 @@
 			                <tr class="active">
 			                  <th>#</th>
 			                  <th>Nombre</th>
+			                  <th>Moneda</th>
 			                  <th colspan="2" class="text-center">Acciones</th>
 			                </tr>
 			              </thead>
 			              
 			              <tbody>
 			              	<%
-			              		
 								for(Pais p : country){
 							%>
 			              	<tr>
 			                  	<td><%=p.getId() %></td>
 			                  	<td><%=p.getNombre() %></td>
+			                  	<td><%=p.getMoneda().getNombre() %></td>
 			                  	<td>
 									<form method="post" action="../paises/modificacion">
 										<input type="hidden" name="id" value="<%=p.getId() %>">
@@ -86,7 +98,7 @@
 									<form name="post_<%=p.getId() %>" style="display:none;" method="post" action="../paises/baja">
 										<input type="hidden" name="id" value="<%=p.getId() %>">
 									</form>
-									<a href="#" class="btn btn-sm btn-danger" onclick="if (confirm('¿Seguro que desea eliminar la categoria?')) { document.post_<%=p.getId() %>.submit(); } event.returnValue = false; return false;"><span data-feather="trash"></span></a>
+									<a href="#" class="btn btn-sm btn-danger" onclick="if (confirm('¿Seguro que desea eliminar el pais?')) { document.post_<%=p.getId() %>.submit(); } event.returnValue = false; return false;"><span data-feather="trash"></span></a>
 						      	</td>
 			                </tr>
 			                <% } %>
