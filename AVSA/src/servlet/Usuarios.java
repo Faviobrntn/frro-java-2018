@@ -34,7 +34,6 @@ public class Usuarios extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			System.out.println(request.getPathInfo());
 			switch (request.getPathInfo()) {
 				case "/alta":
 					try {
