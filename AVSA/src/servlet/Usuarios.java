@@ -165,12 +165,16 @@ public class Usuarios extends HttpServlet {
 		
 	}
 	
-	private void baja(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("DELETEEEEEE");
-		System.out.println(request.getPathInfo());
-		System.out.println(request.getParameter("id"));
-		//request.getRequestDispatcher("/users/index.jsp").forward(request, response);
+	private void baja(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
+		try {
+			Usuario user = new Usuario();
+			user.setId(Integer.parseInt(request.getParameter("id")));
+			
+			CtrlABMUsuario ctrlUsuario = new CtrlABMUsuario();
+			ctrlUsuario.delete(user);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 	
 }
