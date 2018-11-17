@@ -132,7 +132,7 @@ public class DataUsuario {
 		Usuario p = null;
 		try{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT * FROM usuarios u INNER JOIN paises p on p.id = u.id_pais WHERE u.id=?");
+					"SELECT * FROM usuarios u INNER JOIN paises p ON p.id = u.id_pais WHERE u.id=?");
 			stmt.setInt(1, user.getId());
 			
 			rs=stmt.executeQuery();
@@ -172,8 +172,9 @@ public class DataUsuario {
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT u.id, u.nombre, apellido, id_pais, p.nombre FROM usuarios u INNER JOIN paises on p.id=u.id_pais WHERE user=? and pass=?");
-			stmt.setString(1, usu.getUsuario());
+					"SELECT u.id, u.nombre, apellido, email, rol, id_pais, p.nombre "
+					+ "FROM usuarios u INNER JOIN paises p ON p.id = u.id_pais WHERE u.email=? AND u.password=?");
+			stmt.setString(1, usu.getEmail());
 			stmt.setString(2, usu.getPassword());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()){
@@ -182,8 +183,10 @@ public class DataUsuario {
 					u.setId(rs.getInt("id"));
 					u.setNombre(rs.getString("nombre"));
 					u.setApellido(rs.getString("apellido"));
+					u.setEmail(rs.getString("email"));
+					u.setRol(rs.getString("rol"));
 					u.getPais().setId(rs.getInt("id_pais"));
-					u.getPais().setNombre(rs.getString("nombre"));
+					u.getPais().setNombre(rs.getString("p.nombre"));
 			}
 			
 		} catch (Exception e) {

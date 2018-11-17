@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.tribes.group.interceptors.TwoPhaseCommitInterceptor.MapEntry;
 
+import controlers.CtrlABMUsuario;
+import entity.Usuario;
+
 /**
  * Servlet implementation class login
  */
@@ -31,35 +34,68 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/index.html").forward(request, response);
+		//TODO si esta logeado redirigirlo al dashboard, sino que aparezca la pantalla de login
+		if(request.getSession().getAttribute("usuario") != null) {
+			//Usuario u = (Usuario) request.getSession().getAttribute("usuario");
+			response.sendRedirect("home/");
+		}else {
+			request.getRequestDispatcher("/index.html").forward(request, response);
+		}
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * request.getSession()  ---> SESSION: Si no existe la crea
+	 * CONDICIONES para guardar un objeto en SESION: 
+	 * 	-	tiene que ser un JAVA BINS
+	 * 	-	ser serializable (public cass User implements Serializable (){} ) 
+	 *  -	tenes un construcctor publico y sin parametros
+	 *  -	getter y setter para todos sus atributos
+	 * 
+	 * request.getSession().setAttribute("usuario", u);  User u = new User(); 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//doGet(request, response);
 		
-		for(Entry<String, String[]> entry : request.getParameterMap().entrySet()){
-			System.out.println(entry.getKey()+" - "+entry.getValue()[0]);
+		if(request.getSession().getAttribute("usuario") != null) {
+			response.sendRedirect("home/");
 		}
-		//System.out.println(request.getParameter(""));
-		if(request.getParameter("alta") != null) {
-			System.out.print("Esta es un Alta");
-		}
-		if(request.getParameter("baja") != null) {
-			System.out.print("Esta es una Baja");
-		}
-		if(request.getParameter("edit") != null) {
-			System.out.print("Esta es una Modificación");
-		}
-		if(request.getParameter("search") != null) {
-			System.out.print("Esta es una Busqueda");
-		}
-		System.out.println("POST");
 		
-		//Si esta logeado lo redirijo a la home
-		response.sendRedirect("home/");
+		if(request.getParameter("email") != null) {
+			
+			if(request.getParameter("password") != null) {
+				try {
+					Usuario user = new Usuario();
+					user.setEmail(request.getParameter("email"));
+					user.setPassword(request.getParameter("password"));
+					
+					CtrlABMUsuario ctrlUsuario = new CtrlABMUsuario();
+				
+					user = ctrlUsuario.login(user);
+					
+					request.getSession();
+					request.getSession().setAttribute("usuario", user);
+					
+					//Si esta logeado lo redirijo a la home
+					response.sendRedirect("home/");
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					request.getRequestDispatcher("/index.html").forward(request, response);
+				}
+			}else {
+				System.out.print("Contraseña vacia");
+				request.getRequestDispatcher("/index.html").forward(request, response);
+			}
+		}else {
+			System.out.print("Email vacio");
+			request.getRequestDispatcher("/index.html").forward(request, response);
+		}
+		
+		
 				
 				
 		//request.getRequestDispatcher("/home").forward(request, response);
