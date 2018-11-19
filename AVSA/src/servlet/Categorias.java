@@ -107,7 +107,6 @@ public class Categorias extends HttpServlet {
 		Categoria categ = new Categoria();
 		categ.setNombre(request.getParameter("nombre"));
 		categ.setDescripcion(request.getParameter("descripcion"));
-		
 		CtrlABMCategoria ctrlCategoria = new CtrlABMCategoria();
 		ctrlCategoria.add(categ);
 			

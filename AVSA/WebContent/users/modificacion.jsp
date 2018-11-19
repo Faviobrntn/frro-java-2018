@@ -1,6 +1,4 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="entity.Usuario"%>
-<%@page import="entity.Pais"%>
+<%@page import="java.util.ArrayList, entity.Usuario, entity.Pais"%>
 <% Usuario usuario = (Usuario) request.getAttribute("usuario"); %>
 <% ArrayList<Pais> paises = (ArrayList<Pais>) request.getAttribute("paises"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

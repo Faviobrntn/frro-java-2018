@@ -32,28 +32,14 @@ public class FactoryConexion {
 		
 }
 	
-/*	public Connection getConn(){
-		try {
-			if(conn==null || conn.isClosed()){
-				conn = DriverManager.getConnection(
-						"jdbc:"+type+"://"+host+":"+port+"/"+
-								db+"?user="+user+"&password="+pass);
-				cantConn++;	
-			}
-		} catch (SQLException e) {
-			new ApplicationException("Error connecting to the DB",e);
 
-		}
-		return conn; 
-	}*/
-	
 	private Connection conn;
 	private int cantConn=0;
 	public Connection getConn() throws SQLException,AppDataException{
 		try {
 			if(conn==null || conn.isClosed()){	
 				conn = DriverManager.getConnection(
-			        "jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+pass);
+			        "jdbc:"+type+"://" + host + ":" + port+"/"+db+"?user="+user+"&password="+pass);
 			}
 		} catch (SQLException e) {
 			throw new AppDataException(e, "Error al conectar a la base de datos");

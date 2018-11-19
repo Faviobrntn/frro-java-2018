@@ -1,5 +1,4 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="entity.Moneda"%>
+<%@page import="java.util.ArrayList, entity.Moneda"%>
 <% ArrayList<Moneda> coins = (ArrayList<Moneda>) request.getAttribute("monedas"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>

@@ -1,6 +1,5 @@
-/servlet/
 /controlers/
 /data/
-/log4j2.xml
-/util/
 /entity/
+/servlet/
+/util/
