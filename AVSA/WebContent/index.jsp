@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,6 +20,17 @@
   </head>
 
   <body class="text-center">
+  	
+  	<% if(request.getAttribute("mensajeFlash") != null){ %>
+  	<div style="top: 0;text-align: center;position: absolute;width: 100%;">
+		<div class="alert alert-primary" role="alert">
+		    <h5><b>Mensaje del sistema</b></h5>
+			  <%= request.getAttribute("mensajeFlash")  %>
+			</div>
+		</div>
+	<% } %>
+	
+
     <form class="form-signin" action="login" method="post">
       <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Ingreso al sistema</h1>
@@ -33,7 +44,7 @@
         </label>
       </div>
       <button class="btn btn-lg btn-primary active" type="submit">Iniciar Sesion</button>
-      <a href="usuarios/agregar" class="btn btn-lg btn-secondary active" role="button" aria-pressed="true" >Registrarse</a>
+      <a href="registrarse" class="btn btn-lg btn-secondary active" role="button" aria-pressed="true" >Registrarse</a>
       <p class="mt-5 mb-3 text-muted">&copy; A ver si ahorra-2018</p>
     </form>
   </body>

@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
 			//Usuario u = (Usuario) request.getSession().getAttribute("usuario");
 			response.sendRedirect("home/");
 		}else {
-			request.getRequestDispatcher("/index.html").forward(request, response);
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
 	
 	}
@@ -63,9 +63,9 @@ public class Login extends HttpServlet {
 			response.sendRedirect("home/");
 		}
 		
-		if(request.getParameter("email") != null) {
+		if(request.getParameter("email") != "") {
 			
-			if(request.getParameter("password") != null) {
+			if(request.getParameter("password") != "") {
 				try {
 					Usuario user = new Usuario();
 					user.setEmail(request.getParameter("email"));
@@ -75,6 +75,7 @@ public class Login extends HttpServlet {
 				
 					user = ctrlUsuario.login(user);
 					
+					if(user == null) { throw new Exception("Usuario y/o contraseña incorrectos."); }
 					request.getSession();
 					request.getSession().setAttribute("usuario", user);
 					
@@ -82,17 +83,18 @@ public class Login extends HttpServlet {
 					response.sendRedirect("home/");
 					
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					request.getRequestDispatcher("/index.html").forward(request, response);
+					request.setAttribute("mensajeFlash", e.getMessage());
+					request.getRequestDispatcher("/index.jsp").forward(request, response);
 				}
 			}else {
 				System.out.print("Contraseña vacia");
-				request.getRequestDispatcher("/index.html").forward(request, response);
+				request.setAttribute("mensajeFlash", "Contraseña vacia");
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 		}else {
 			System.out.print("Email vacio");
-			request.getRequestDispatcher("/index.html").forward(request, response);
+			request.setAttribute("mensajeFlash", "Email vacio");
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
 		
 		
