@@ -13,6 +13,7 @@ import controlers.CtrlABMPais;
 import controlers.CtrlABMUsuario;
 import entity.Pais;
 import entity.Usuario;
+import util.Componentes;
 
 /**
  * Servlet implementation class Usuarios
@@ -26,14 +27,35 @@ public class Usuarios extends HttpServlet {
      */
     public Usuarios() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
+    /**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			if(!Componentes.esAdmin(request, response)) { throw new Exception("No tiene permiso para realizar esta acción."); }
+			
+			String method = request.getMethod();
+			
+		    if (method.equals("GET")) {
+		    	doGet(request, response);
+		    } else if (method.equals("POST")) {
+		        doPost(request, response);
+		    }
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			request.getSession().setAttribute("mensaje", e.getMessage());
+			response.sendRedirect("../home/");
+		}
+	}
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			
 			switch (request.getPathInfo()) {
 				case "/alta":
 					try {
@@ -43,7 +65,7 @@ public class Usuarios extends HttpServlet {
 						request.setAttribute("paises", paises);
 						request.getRequestDispatcher("/users/alta.jsp").forward(request, response);
 					} catch (Exception e) {
-						e.printStackTrace();
+						throw e;
 					}
 					break;
 			}
@@ -55,8 +77,8 @@ public class Usuarios extends HttpServlet {
 			request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			request.getSession().setAttribute("mensaje", e.getMessage());
 		}
 
 	}
@@ -72,7 +94,8 @@ public class Usuarios extends HttpServlet {
 				this.alta(request, response);
 				response.sendRedirect("../usuarios/");
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
 			}
 			break;
 			
@@ -81,8 +104,8 @@ public class Usuarios extends HttpServlet {
 				this.baja(request, response);
 				response.sendRedirect("../usuarios/");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
 			}
 			break;
 			
@@ -90,9 +113,9 @@ public class Usuarios extends HttpServlet {
 			try {
 				this.modificacion(request, response);
 				request.getRequestDispatcher("/users/modificacion.jsp").forward(request, response);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
 			}
 			break;
 		
@@ -101,8 +124,8 @@ public class Usuarios extends HttpServlet {
 				this.modificar(request, response);
 				response.sendRedirect("../usuarios/");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
 			}
 			break;
 		}

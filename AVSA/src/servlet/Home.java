@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.Componentes;
 
-@WebServlet({ "/home/*", "/Home/*", "/HOME/*"})
+
+@WebServlet({ "/home", "/Home", "/HOME", "/home/*"})
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -19,6 +21,51 @@ public class Home extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    /**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			if(!Componentes.estaLogeado(request, response)) { throw new Exception("No es un usuario activo. Por favor, vuelva a ingresar."); }
+			
+			String method = request.getMethod();
+			
+			if (method.equals("GET")) {
+		        doGet(request, response);
+
+		    } else if (method.equals("HEAD")) {
+		        doHead(request, response);
+
+		    } else if (method.equals("POST")) {
+		        doPost(request, response);
+
+		    } else if (method.equals("PUT")) {
+		        doPut(request, response);
+
+		    } else if (method.equals("DELETE")) {
+		        doDelete(request, response);
+
+		    } else if (method.equals("OPTIONS")) {
+		        doOptions(request, response);
+
+		    } else if (method.equals("TRACE")) {
+		        doTrace(request, response);
+
+		    } else {
+		    	doGet(request, response);
+		        //
+		        // Note that this means NO servlet supports whatever
+		        // method was requested, anywhere on this server.
+		        //
+		    }
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			request.getSession().setAttribute("mensaje", e.getMessage());
+			response.sendRedirect("../login");
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

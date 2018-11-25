@@ -83,17 +83,17 @@ public class Login extends HttpServlet {
 					response.sendRedirect("home/");
 					
 				} catch (Exception e) {
-					request.setAttribute("mensajeFlash", e.getMessage());
+					request.getSession().setAttribute("mensaje", e.getMessage());
 					request.getRequestDispatcher("/index.jsp").forward(request, response);
 				}
 			}else {
 				System.out.print("Contraseña vacia");
-				request.setAttribute("mensajeFlash", "Contraseña vacia");
+				request.getSession().setAttribute("mensaje", "Contraseña vacia");
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 		}else {
 			System.out.print("Email vacio");
-			request.setAttribute("mensajeFlash", "Email vacio");
+			request.getSession().setAttribute("mensaje", "Email vacio");
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
 		

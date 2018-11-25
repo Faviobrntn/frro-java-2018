@@ -20,15 +20,7 @@
   </head>
 
   <body class="text-center">
-  	
-  	<% if(request.getAttribute("mensajeFlash") != null){ %>
-  	<div style="top: 0;text-align: center;position: absolute;width: 100%;">
-		<div class="alert alert-primary" role="alert">
-		    <h5><b>Mensaje del sistema</b></h5>
-			  <%= request.getAttribute("mensajeFlash")  %>
-			</div>
-		</div>
-	<% } %>
+  	<jsp:include page="elementos/mensajes.jsp"></jsp:include>
 	
 
     <form class="form-signin" action="login" method="post">

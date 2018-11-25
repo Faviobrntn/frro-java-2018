@@ -44,8 +44,7 @@ public class Registrarse extends HttpServlet {
 				paises = ctrlPais.getAll();
 				request.setAttribute("paises", paises);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				request.getSession().setAttribute("mensaje", e.getMessage());
 			}
 			request.getRequestDispatcher("/registrarse.jsp").forward(request, response);
 		}
@@ -55,7 +54,6 @@ public class Registrarse extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try {
 			if(request.getParameter("apellido") == "") { throw new Exception("El apellido no puede estar vacio."); }
 			if(request.getParameter("nombre") == "") { throw new Exception("El nombre no puede estar vacio."); }
@@ -80,7 +78,7 @@ public class Registrarse extends HttpServlet {
 			response.sendRedirect("login");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			request.setAttribute("mensajeFlash", e.getMessage());
+			request.getSession().setAttribute("mensaje", e.getMessage());
 			request.getRequestDispatcher("/registrarse.jsp").forward(request, response);
 		}
 	}

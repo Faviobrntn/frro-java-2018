@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controlers.CtrlABMCategoria;
 import entity.Categoria;
+import util.Componentes;
 
 /**
  * Servlet implementation class Categorias
@@ -26,7 +27,30 @@ public class Categorias extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
+    
+    /**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			if(!Componentes.esAdmin(request, response)) { throw new Exception("No tiene permiso para realizar esta acción."); }
+			
+			String method = request.getMethod();
+			
+		    if (method.equals("GET")) {
+		    	doGet(request, response);
+		    } else if (method.equals("POST")) {
+		        doPost(request, response);
+		    }
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			request.getSession().setAttribute("mensaje", e.getMessage());
+			response.sendRedirect("../home/");
+		}
+	}
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

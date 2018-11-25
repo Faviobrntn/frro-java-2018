@@ -13,6 +13,7 @@ import controlers.CtrlABMPais;
 import controlers.CtrlABMUsuario;
 import entity.Pais;
 import entity.Usuario;
+import util.Componentes;
 
 /**
  * Servlet implementation class Perfil
@@ -28,12 +29,35 @@ public class Perfil extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    /**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			System.out.println(Componentes.estaLogeado(request, response));
+			if(!Componentes.estaLogeado(request, response)) { throw new Exception("No es un usuario activo. Por favor, vuelva a ingresar."); }
+			
+			String method = request.getMethod();
+			System.out.println(method);
+			
+		    if (method.equals("GET")) {
+		    	doGet(request, response);
+		    } else if (method.equals("POST")) {
+		        doPost(request, response);
+		    }
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			request.getSession().setAttribute("mensaje", e.getMessage());
+			response.sendRedirect("../login");
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		System.out.println("Get - Perfil");
 		if(request.getSession().getAttribute("usuario") != null) {
 			System.out.println(request.getPathInfo());
@@ -46,7 +70,8 @@ public class Perfil extends HttpServlet {
 					response.sendRedirect("../login");
 				    return; // <--- Here.
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.getMessage());
+					request.getSession().setAttribute("mensaje", e.getMessage());
 				}
 				break;
 			}
@@ -61,8 +86,8 @@ public class Perfil extends HttpServlet {
 				
 				request.getRequestDispatcher("/profile/index.jsp").forward(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
 				response.sendRedirect("../login");
 			}
 		}else {
@@ -76,39 +101,34 @@ public class Perfil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(request.getSession().getAttribute("usuario") != null) {
-						
-			try {
-				Usuario usuario_sesion = (Usuario) request.getSession().getAttribute("usuario");
-				
-				Usuario user = new Usuario();
-				user.setId(Integer.parseInt(request.getParameter("id")));
-				user.setApellido(request.getParameter("apellido"));
-				user.setNombre(request.getParameter("nombre"));
-				
-				//user.setId(Integer.parseInt(usuario_sesion.getId()));
-				user.setEmail(usuario_sesion.getEmail());
-				user.setRol(usuario_sesion.getRol());
-				
-				Pais pais = new Pais();
-				pais.setId(Integer.parseInt(request.getParameter("id_pais")));
-				
-				user.setPais(pais);
-				
-				CtrlABMUsuario ctrlUsuario = new CtrlABMUsuario();
-				ctrlUsuario.update(user);
-				
-				//request.getRequestDispatcher("/profile/index.jsp").forward(request, response);
-				doGet(request, response);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				//request.getRequestDispatcher("/profile/index.jsp").forward(request, response);
-			}
-		
-		}else{
-			response.sendRedirect("../login");
+								
+		try {
+			Usuario usuario_sesion = (Usuario) request.getSession().getAttribute("usuario");
+			
+			Usuario user = new Usuario();
+			user.setId(Integer.parseInt(request.getParameter("id")));
+			user.setApellido(request.getParameter("apellido"));
+			user.setNombre(request.getParameter("nombre"));
+			
+			//user.setId(Integer.parseInt(usuario_sesion.getId()));
+			user.setEmail(usuario_sesion.getEmail());
+			user.setRol(usuario_sesion.getRol());
+			
+			Pais pais = new Pais();
+			pais.setId(Integer.parseInt(request.getParameter("id_pais")));
+			
+			user.setPais(pais);
+			
+			CtrlABMUsuario ctrlUsuario = new CtrlABMUsuario();
+			ctrlUsuario.update(user);
+			
+			request.getSession().setAttribute("usuario", user);
+			request.getSession().setAttribute("mensaje", "Se actualizo con éxito!");
+			//request.getRequestDispatcher("/profile/index.jsp").forward(request, response);
+			doGet(request, response);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			request.getSession().setAttribute("mensaje", e.getMessage());
 		}
 		
 	}
