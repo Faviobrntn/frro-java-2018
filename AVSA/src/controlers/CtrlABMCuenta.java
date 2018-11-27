@@ -6,11 +6,11 @@ import data.DataCuenta;
 import entity.Cuenta;
 import entity.Usuario;
 
-public class CtrlABMCuentas {
+public class CtrlABMCuenta {
 	
 	private DataCuenta dataCuenta;
 	
-	public CtrlABMCuentas(){
+	public CtrlABMCuenta(){
 		dataCuenta = new DataCuenta();
 	}
 	
