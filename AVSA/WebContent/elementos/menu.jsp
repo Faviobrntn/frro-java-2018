@@ -1,4 +1,11 @@
 <%! String url = "/AVerSiAhorra/"; %>
+<%@page import="entity.Usuario"%>
+<% 
+Usuario user = new Usuario();
+if(request.getSession().getAttribute("usuario") != null){ 
+	user = (Usuario) request.getSession().getAttribute("usuario");
+} 
+%>
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
@@ -10,6 +17,7 @@
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
             </li>
+            <% if(user.getRol().equals("administrador")){ %>
             <li class="nav-item">
                 <!--<a class="nav-link" href="< %= url %>usuarios/"> -->
                 <a class="nav-link" href="../usuarios/">
@@ -35,6 +43,17 @@
                     Monedas
                 </a>
             </li>
+            <% } %>
+            
+            
+            <% if(user.getRol().equals("usuario")){ %>
+            <li class="nav-item">
+                <a class="nav-link" href="<%= url %>cuentas/">
+                    <span data-feather="tag"></span>
+                    Mis Cuentas
+                </a>
+            </li>
+            <% } %>
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="bar-chart-2"></span>

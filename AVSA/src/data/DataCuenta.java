@@ -19,14 +19,11 @@ public class DataCuenta {
 		ResultSet rs=null;
 		ArrayList<Cuenta> cuentas= new ArrayList<Cuenta>();
 		try{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT * FROM cuentas c "
-					+ "INNER JOIN usuarios u ON u.id = c.id_usuario"
-					+ "INNER JOIN monedas m ON m.id = c.id_moneda"
-					+ "WHERE u.id=?");
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT * FROM cuentas c INNER JOIN monedas m ON m.id = c.id_moneda WHERE c.id_usuario = ?");
 			stmt.setInt(1, u.getId());
-			rs = stmt.executeQuery();
 			
+			rs=stmt.executeQuery();			
 			
 			if(rs!=null){
 				while(rs.next()){
@@ -69,7 +66,7 @@ public class DataCuenta {
 		Cuenta c = null;
 		try{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT * FROM cuentas INNER JOIN monedas m ON m.id = c.id_moneda WHERE id=?");
+					"SELECT * FROM cuentas c INNER JOIN monedas m ON m.id = c.id_moneda WHERE c.id=?");
 			stmt.setInt(1, cuenta.getId());
 			
 			rs=stmt.executeQuery();
@@ -77,8 +74,8 @@ public class DataCuenta {
 			if(rs!=null && rs.next()){
 				c = new Cuenta();
 				c.setMoneda(new Moneda());
-				c.setId(rs.getInt("id"));
-				c.setNombre(rs.getString("nombre"));
+				c.setId(rs.getInt("c.id"));
+				c.setNombre(rs.getString("c.nombre"));
 				c.setValorInicial(rs.getFloat("valor_inicial"));
 				c.setColor(rs.getString("color"));
 				c.setTipo(rs.getString("tipo"));
@@ -173,7 +170,7 @@ public class DataCuenta {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-						"UPDATE cuentas SET nombre=?, valor_inicial=?, id_moneda=?, color=?, tipo=?, descripcion=?, WHERE id=?"
+						"UPDATE cuentas SET nombre=?, valor_inicial=?, id_moneda=?, color=?, tipo=?, descripcion=? WHERE id=?"
 					);
 
 			stmt.setString(1, cuenta.getNombre());

@@ -13,6 +13,16 @@ public class Cuenta {
 	private String tipo;
 	private String descripcion;
 	private Timestamp creado;
+	public static String[] tipos = {
+			  "General", 
+			  "Efectivo", 
+			  "Tarjeta de credito", 
+			  "Caja de ahorro",
+			  "Seguro",
+			  "Inversion",
+			  "Prestamo",
+			  "Hipoteca"
+			};
 	
 	public int getId() {
 		return id;

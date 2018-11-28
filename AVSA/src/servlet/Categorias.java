@@ -84,7 +84,9 @@ public class Categorias extends HttpServlet {
 					this.alta(request, response);
 					response.sendRedirect("../categorias/");
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.getMessage());
+					request.getSession().setAttribute("mensaje", e.getMessage());
+					request.getRequestDispatcher("/categories/index.jsp").forward(request, response);
 				}
 				break;
 				
@@ -94,8 +96,9 @@ public class Categorias extends HttpServlet {
 					this.baja(request, response);
 					response.sendRedirect("../categorias/");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.getMessage());
+					request.getSession().setAttribute("mensaje", e.getMessage());
+					request.getRequestDispatcher("/categories/index.jsp").forward(request, response);
 				}
 				break;
 				
@@ -104,9 +107,10 @@ public class Categorias extends HttpServlet {
 				try {
 					this.modificacion(request, response);
 					request.getRequestDispatcher("/categories/modificacion.jsp").forward(request, response);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					request.getSession().setAttribute("mensaje", e.getMessage());
+					request.getRequestDispatcher("/categories/index.jsp").forward(request, response);
 				}
 				break;
 			
@@ -116,8 +120,9 @@ public class Categorias extends HttpServlet {
 					this.modificar(request, response);
 					response.sendRedirect("../categorias/");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.getMessage());
+					request.getSession().setAttribute("mensaje", e.getMessage());
+					request.getRequestDispatcher("/categories/index.jsp").forward(request, response);
 				}
 				break;
 		}

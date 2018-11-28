@@ -105,6 +105,7 @@ public class Cuentas extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/accounts/index.jsp").forward(request, response);
 			}
 			break;
 			
@@ -115,6 +116,7 @@ public class Cuentas extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/accounts/index.jsp").forward(request, response);
 			}
 			break;
 			
@@ -125,6 +127,7 @@ public class Cuentas extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/accounts/index.jsp").forward(request, response);
 			}
 			break;
 		
@@ -135,6 +138,7 @@ public class Cuentas extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/accounts/index.jsp").forward(request, response);
 			}
 			break;
 		}
@@ -142,7 +146,6 @@ public class Cuentas extends HttpServlet {
 	
 	
 	private void alta(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		Cuenta cuenta = new Cuenta();
 		cuenta.setUsuario(this.user);
 		cuenta.setNombre(request.getParameter("nombre"));
@@ -153,14 +156,14 @@ public class Cuentas extends HttpServlet {
 		
 		Date date = new Date();
 		cuenta.setCreado(new Timestamp(date.getTime()));
-		
+
 		Moneda moneda = new Moneda();
-		moneda.setId(Integer.parseInt(request.getParameter("id_moneda")));
+		moneda.setId(Integer.parseInt(request.getParameter("moneda_id")));
 		
 		cuenta.setMoneda(moneda);
 		
 		CtrlABMCuenta ctrlCuenta = new CtrlABMCuenta();
-		ctrlCuenta.add(cuenta);	
+		ctrlCuenta.add(cuenta);
 	}
 	
 	
@@ -170,7 +173,7 @@ public class Cuentas extends HttpServlet {
 		cuenta.setId(Integer.parseInt(request.getParameter("id")));
 		
 		CtrlABMCuenta ctrlcuenta = new CtrlABMCuenta();			
-		request.setAttribute("usuario", ctrlcuenta.getById(cuenta));
+		request.setAttribute("cuenta", ctrlcuenta.getById(cuenta));
 		
 		//Armo un Array comun para le select
 		CtrlABMMoneda ctrlMoneda = new CtrlABMMoneda();
@@ -180,9 +183,9 @@ public class Cuentas extends HttpServlet {
 	
 	
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+
 		Cuenta cuenta = new Cuenta();
-		//cuenta.setUsuario(this.user);
+		cuenta.setId(Integer.parseInt(request.getParameter("id")));
 		cuenta.setNombre(request.getParameter("nombre"));
 		cuenta.setValorInicial(Float.parseFloat(request.getParameter("valor_inicial")));
 		cuenta.setColor(request.getParameter("color"));
@@ -190,7 +193,7 @@ public class Cuentas extends HttpServlet {
 		cuenta.setDescripcion(request.getParameter("descripcion"));
 		
 		Moneda moneda = new Moneda();
-		moneda.setId(Integer.parseInt(request.getParameter("id_moneda")));
+		moneda.setId(Integer.parseInt(request.getParameter("moneda_id")));
 		
 		cuenta.setMoneda(moneda);
 		

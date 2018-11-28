@@ -78,7 +78,9 @@ public class Monedas extends HttpServlet {
 				this.alta(request, response);
 				response.sendRedirect("../monedas/");
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/money/index.jsp").forward(request, response);
 			}
 			break;
 			
@@ -87,8 +89,9 @@ public class Monedas extends HttpServlet {
 				this.baja(request, response);
 				response.sendRedirect("../monedas/");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/money/index.jsp").forward(request, response);
 			}
 			break;
 			
@@ -98,7 +101,10 @@ public class Monedas extends HttpServlet {
 				response.getWriter().println(true);
 				//response.sendRedirect("../monedas/");
 			} catch (Exception e) {
-				response.getWriter().println(e.toString());
+				//response.getWriter().println(e.toString());
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/money/index.jsp").forward(request, response);
 
 			}
 			break;

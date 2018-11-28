@@ -96,6 +96,7 @@ public class Usuarios extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 			}
 			break;
 			
@@ -106,6 +107,7 @@ public class Usuarios extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 			}
 			break;
 			
@@ -116,6 +118,7 @@ public class Usuarios extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 			}
 			break;
 		
@@ -126,6 +129,7 @@ public class Usuarios extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 			}
 			break;
 		}

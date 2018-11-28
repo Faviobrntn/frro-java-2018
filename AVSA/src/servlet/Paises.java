@@ -87,7 +87,9 @@ public class Paises extends HttpServlet {
 				this.alta(request, response);
 				response.sendRedirect("../paises/");
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/countries/index.jsp").forward(request, response);
 			}
 			break;
 			
@@ -96,8 +98,9 @@ public class Paises extends HttpServlet {
 				this.baja(request, response);
 				response.sendRedirect("../paises/");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/countries/index.jsp").forward(request, response);
 			}
 			break;
 			
@@ -105,9 +108,10 @@ public class Paises extends HttpServlet {
 			try {
 				this.modificacion(request, response);
 				request.getRequestDispatcher("/countries/modificacion.jsp").forward(request, response);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/countries/index.jsp").forward(request, response);
 			}
 			break;
 		
@@ -116,8 +120,9 @@ public class Paises extends HttpServlet {
 				this.modificar(request, response);
 				response.sendRedirect("../paises/");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				request.getSession().setAttribute("mensaje", e.getMessage());
+				request.getRequestDispatcher("/countries/index.jsp").forward(request, response);
 			}
 			break;
 	}
