@@ -87,8 +87,8 @@
 			                    </select>
 			                </div>
 			                <div class="col-md-4 mb-3">
-			                    <label for="valor-inicial">Importe</label>
-			                    <input type="number" name="valor_inicial" class="form-control" id="valor-inicial" required="required">
+			                    <label for="importe">Importe</label>
+			                    <input type="number" name="importe" class="form-control" id="importe" required="required">
 			                </div>
 			            </div>
 						

@@ -1,7 +1,9 @@
-<%@page import="java.util.ArrayList, entity.Moneda, entity.Cuenta"%>
-<% ArrayList<Moneda> money = (ArrayList<Moneda>) request.getAttribute("monedas"); %>
-<% String[] tipos = Cuenta.tipos; %>
-<% Cuenta cuenta = (Cuenta) request.getAttribute("cuenta"); %>
+<%@page import="java.util.ArrayList, entity.Categoria, entity.Cuenta, entity.Registro"%>
+<% ArrayList<Cuenta> cuentas = (ArrayList<Cuenta>) request.getAttribute("cuentas"); %>
+<% ArrayList<Categoria> categorias = (ArrayList<Categoria>) request.getAttribute("categorias"); %>
+<% String[] tipos = Registro.tipos; %>
+<% String[] estados = Registro.estados; %>
+<% Registro registro = (Registro) request.getAttribute("registro"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="es">
@@ -12,7 +14,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Cuentas - agregar</title>
+    <title>Registros - editar</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../styles/bootstrap.min.css" rel="stylesheet">
@@ -32,73 +34,85 @@
         
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-	            <h1 class="h2">Editar cuenta</h1>
+	            <h1 class="h2">Editar Registro</h1>
 	            <div class="btn-toolbar mb-2 mb-md-0">
-	            	<div class="btn-group mr-2">
-		            	<form name="post_<%=cuenta.getId() %>" style="display:none;" method="post" action="../cuentas/baja">
-							<input type="hidden" name="id" value="<%=cuenta.getId() %>">
-						</form>
-						<a href="#" class="btn btn-sm btn-outline-danger" onclick="if (confirm('¿Seguro que desea eliminar la cuenta? \n(Se perderan todos los registros)')) { document.post_<%=cuenta.getId() %>.submit(); } event.returnValue = false; return false;"><span data-feather="trash"></span></a>
-	              	</div>
-	              	<div class="btn-group mr-2">
-	                	<a href="../cuentas/" class="btn btn-sm btn-outline-secondary">Volver</a>
-	              	</div>
+	              <div class="btn-group mr-2">
+	                <a href="../registros/" class="btn btn-sm btn-outline-secondary">Volver</a>
+	              </div>
 	            </div>
 	        </div>
 	        <div class="row">    
 			    <div class="col-md-8">
 			        <h4 class="mb-3">Complete el formulario</h4>
-			        <form action="../cuentas/modificar" method="post" class="needs-validation">
-			        <input type="hidden" name="id" value="<%=cuenta.getId()%>">
-			            <div class="row">
-			                <div class="col-md-6 mb-3">
-			                    <label for="nombre">Nombre</label>
-			                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="" required="required" value="<%=cuenta.getNombre()%>">
-			                </div>
-			                <div class="col-md-6 mb-3">
-			                    <label for="valor-inicial">Valor inicial</label>
-			                    <input type="number" name="valor_inicial" class="form-control" id="valor-inicial" required="required" value="<%=cuenta.getValorInicial()%>">
-			                </div>
-			            </div>
-						
-						<div class="row">
+			        <form action="../registros/modificar" method="post" class="needs-validation">
+			        	<div class="row">
 				            <div class="col-md-4 mb-3">
 			                    <label for="tipo">Tipo</label>
 			                    <select name="tipo" class="form-control" id="tipo" required="required">
-			                    	<option value="">Seleccione el tipo de cuenta</option>
 			                    	<% for (int i = 0; i < tipos.length; i++) { %>
-			                    		<% if(cuenta.getTipo().equals(tipos[i])){ %>
+			                    		<% if(registro.getTipo().equals(tipos[i])){ %>
 			                    			<option value="<%= tipos[i] %>" selected><%= tipos[i] %></option>
 			                    		<% }else{ %>
 			                    			<option value="<%= tipos[i] %>"><%= tipos[i] %></option>
 										<% } %>
-			                    	
 			                    	<% } %>
 			                    </select>
 			                </div>
 		                
 				            <div class="col-md-4 mb-3">
-			                    <label for="moneda-id">Moneda</label>
-			                    <select name="moneda_id" class="form-control" id="moneda-id" required="required">
-			                    	<option value="">Seleccione Moneda</option>
-			                    	<% for(Moneda p : money){ %>
-			                    		<% if(cuenta.getMoneda().getId() == p.getId()){ %>
-		                    				<option value="<%= p.getId() %>" selected><%= p.getNombre() %></option>
+			                    <label for="cuenta-id">Cuentas</label>
+			                    <select name="cuenta_id" class="form-control" id="cuenta-id" required="required">
+			                    	<option value="">Seleccione Cuenta</option>
+			                    	<% for(Cuenta c : cuentas){ %>
+			                    		<% if(registro.getCuenta().getId() == c.getId()){ %>
+		                    				<option value="<%= c.getId() %>" selected><%= c.getNombre() %></option>
 			                    		<% }else{ %>
-			                    			<option value="<%= p.getId() %>"><%= p.getNombre() %></option>
+			                    			<option value="<%= c.getId() %>"><%= c.getNombre() %></option>
 										<% } %>
 									<% } %>
 			                    </select>
 			                </div>
 			                
 			                <div class="col-md-4 mb-3">
-			                	<label for="color">Color <span class="text-muted">(No es Optional)</span></label>
-			                	<input type="color" name="color" class="form-control" id="color" style="height: 60%;" required="required" value="<%=cuenta.getColor()%>">
-			            	</div>
+			                    <label for="categoria-id">Categorias</label>
+			                    <select name="categoria_id" class="form-control" id="categoria-id" required="required">
+			                    	<option value="">Seleccione categoria</option>
+			                    	<% for(Categoria c : categorias){ %>
+			                    		<% if(registro.getCategoria().getId() == c.getId()){ %>
+		                    				<option value="<%= c.getId() %>" selected><%= c.getNombre() %></option>
+			                    		<% }else{ %>
+			                    			<option value="<%= c.getId() %>"><%= c.getNombre() %></option>
+										<% } %>
+									<% } %>
+			                    </select>
+			                </div>
+			                
 						</div>
+						
+			            <div class="row">
+			                <div class="col-md-4 mb-3">
+			                    <label for="estado">Estado</label>
+			                    <select name="estado" class="form-control" id="estado" required="required">
+			                    	<option value="">Seleccione el estado</option>
+			                    	<% for (int i = 0; i < estados.length; i++) { %>
+			                    		<% if(registro.getEstado().equals(tipos[i])){ %>
+			                    			<option value="<%= estados[i] %>" selected><%= estados[i] %></option>
+			                    		<% }else{ %>
+			                    			<option value="<%= estados[i] %>"><%= estados[i] %></option>
+										<% } %>
+			                    	<% } %>
+			                    </select>
+			                </div>
+			                <div class="col-md-4 mb-3">
+			                    <label for="importe">Importe</label>
+			                    <input type="number" name="importe" class="form-control" id="importe" required="required" value="<%=registro.getImporte()%>">
+			                </div>
+			            </div>
+						
+						
 						<div class="form-group">
-							<label for="descripcion">Descripción</label>
-			                <textarea name=descripcion class="form-control" id="descripcion" placeholder="Descripcion.."><%=cuenta.getDescripcion()%></textarea>
+							<label for="notas">Notas</label>
+			                <textarea name="notas" class="form-control" id="notas" placeholder="Descripcion.."><%=registro.getNotas()%></textarea>
 			            </div>
 
 				        <hr class="mb-4">
@@ -110,19 +124,7 @@
      </div>
    </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../js/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="./jquery-slim.min.js"><\/script>')</script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
+    <jsp:include page="/elementos/footer.jsp"></jsp:include>
     
     
   </body>
