@@ -65,33 +65,28 @@ public class Registros extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {	
-			switch (request.getPathInfo()) {
-				case "/alta":
-					try {
-						//Armo un ArrayList para el select
-						CtrlABMCuenta ctrlCuentas = new CtrlABMCuenta();
-						ArrayList<Cuenta> cuentas = ctrlCuentas.getAll(this.user);
-						request.setAttribute("cuentas", cuentas);
 						
-						//Armo un ArrayList para el select
-						CtrlABMCategoria ctrlCategorias = new CtrlABMCategoria();
-						ArrayList<Categoria> categorias = ctrlCategorias.getAll();
-						request.setAttribute("categorias", categorias);
-						
-						request.getRequestDispatcher("/registers/alta.jsp").forward(request, response);
-					} catch (Exception e) {
-						throw e;
-					}
-					break;
-			}
-			
-			//Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-			
-			CtrlABMRegistro ctrlRegistros = new CtrlABMRegistro();
-			ArrayList<Registro> registro = ctrlRegistros.getAll(this.user);
-			request.setAttribute("registro", registro);
+			if(request.getPathInfo().equals("/alta")) {
+				//Armo un ArrayList para el select
+				CtrlABMCuenta ctrlCuentas = new CtrlABMCuenta();
+				ArrayList<Cuenta> cuentas = ctrlCuentas.getAll(this.user);
+				request.setAttribute("cuentas", cuentas);
+				
+				//Armo un ArrayList para el select
+				CtrlABMCategoria ctrlCategorias = new CtrlABMCategoria();
+				ArrayList<Categoria> categorias = ctrlCategorias.getAll();
+				request.setAttribute("categorias", categorias);
+				
+				request.getRequestDispatcher("/registers/alta.jsp").forward(request, response);
+			}else {
+				//Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+				
+				CtrlABMRegistro ctrlRegistros = new CtrlABMRegistro();
+				ArrayList<Registro> registros = ctrlRegistros.getAll(this.user);
+				request.setAttribute("registros", registros);
 
-			request.getRequestDispatcher("/registers/index.jsp").forward(request, response);
+				request.getRequestDispatcher("/registers/index.jsp").forward(request, response);
+			}
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -111,7 +106,8 @@ public class Registros extends HttpServlet {
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					request.getSession().setAttribute("mensaje", e.getMessage());
-					request.getRequestDispatcher("/registers/index.jsp").forward(request, response);
+					//request.getRequestDispatcher("/registers/alta.jsp").forward(request, response);
+					response.sendRedirect("../registros/");
 				}
 				break;
 				
@@ -122,7 +118,8 @@ public class Registros extends HttpServlet {
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					request.getSession().setAttribute("mensaje", e.getMessage());
-					request.getRequestDispatcher("/registers/index.jsp").forward(request, response);
+					//request.getRequestDispatcher("/registers/index.jsp").forward(request, response);
+					response.sendRedirect("../registros/");
 				}
 				break;
 				
@@ -133,7 +130,8 @@ public class Registros extends HttpServlet {
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					request.getSession().setAttribute("mensaje", e.getMessage());
-					request.getRequestDispatcher("/registers/index.jsp").forward(request, response);
+					//request.getRequestDispatcher("/registers/index.jsp").forward(request, response);
+					response.sendRedirect("../registros/");
 				}
 				break;
 			
@@ -153,7 +151,7 @@ public class Registros extends HttpServlet {
 	
 	private void alta(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Registro registro = new Registro();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 		Date fechaHora = dateFormat.parse(request.getParameter("fecha_hora"));
 		
 		registro.setTipo(request.getParameter("tipo"));
@@ -204,7 +202,7 @@ public class Registros extends HttpServlet {
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		Registro registro = new Registro();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 		Date fechaHora = dateFormat.parse(request.getParameter("fecha_hora"));
 		
 		registro.setId(Integer.parseInt(request.getParameter("id")));

@@ -122,7 +122,7 @@ public class DataRegistro {
 		ResultSet keyResultSet=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-				"INSERT INTO Registros(id_usuario, id_cuenta, id_categoria, tipo, fecha_hora, importe, estado, lugar, notas, creado, modificado) values (?,?,?,?,?,?,?,?,?,?,?)",
+				"INSERT INTO registros(id_usuario, id_cuenta, id_categoria, tipo, fecha_hora, importe, estado, lugar, notas, creado, modificado) values (?,?,?,?,?,?,?,?,?,?,?)",
 				PreparedStatement.RETURN_GENERATED_KEYS
 			);
 			stmt.setInt(1, r.getUsuario().getId());
@@ -186,7 +186,7 @@ public class DataRegistro {
 		PreparedStatement stmt=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-				"UPDATE Registros SET id_cuenta=?, id_categoria=?, tipo=?, fecha_hora=?, importe=?, estado=?, lugar=?, notas=?, modificado=? WHERE id=?"
+				"UPDATE registros SET id_cuenta=?, id_categoria=?, tipo=?, fecha_hora=?, importe=?, estado=?, lugar=?, notas=?, modificado=? WHERE id=?"
 			);
 			stmt.setInt(1, r.getCuenta().getId());
 			stmt.setInt(2, r.getCategoria().getId());

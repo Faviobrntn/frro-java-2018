@@ -46,20 +46,7 @@
 			        <h4 class="mb-3">Complete el formulario</h4>
 			        <form action="../registros/modificar" method="post" class="needs-validation">
 			        	<div class="row">
-				            <div class="col-md-4 mb-3">
-			                    <label for="tipo">Tipo</label>
-			                    <select name="tipo" class="form-control" id="tipo" required="required">
-			                    	<% for (int i = 0; i < tipos.length; i++) { %>
-			                    		<% if(registro.getTipo().equals(tipos[i])){ %>
-			                    			<option value="<%= tipos[i] %>" selected><%= tipos[i] %></option>
-			                    		<% }else{ %>
-			                    			<option value="<%= tipos[i] %>"><%= tipos[i] %></option>
-										<% } %>
-			                    	<% } %>
-			                    </select>
-			                </div>
-		                
-				            <div class="col-md-4 mb-3">
+				            <div class="col-md-6 mb-3">
 			                    <label for="cuenta-id">Cuentas</label>
 			                    <select name="cuenta_id" class="form-control" id="cuenta-id" required="required">
 			                    	<option value="">Seleccione Cuenta</option>
@@ -73,7 +60,7 @@
 			                    </select>
 			                </div>
 			                
-			                <div class="col-md-4 mb-3">
+			                <div class="col-md-6 mb-3">
 			                    <label for="categoria-id">Categorias</label>
 			                    <select name="categoria_id" class="form-control" id="categoria-id" required="required">
 			                    	<option value="">Seleccione categoria</option>
@@ -85,9 +72,32 @@
 										<% } %>
 									<% } %>
 			                    </select>
-			                </div>
-			                
+			                </div>    
 						</div>
+						
+			        	<div class="row">
+			        		<div class="col-md-4 mb-3">
+			                    <label for="fechaHora">Fecha y hora</label>
+			                    <input type="text" name="fecha_hora" class="form-control" id="fechaHora" required="required" value="<%=registro.getFechaHora()%>">
+			                </div>
+				            <div class="col-md-4 mb-3">
+			                    <label for="tipo">Tipo</label>
+			                    <select name="tipo" class="form-control" id="tipo" required="required">
+			                    	<% for (int i = 0; i < tipos.length; i++) { %>
+			                    		<% if(registro.getTipo().equals(tipos[i])){ %>
+			                    			<option value="<%= tipos[i] %>" selected><%= tipos[i] %></option>
+			                    		<% }else{ %>
+			                    			<option value="<%= tipos[i] %>"><%= tipos[i] %></option>
+										<% } %>
+			                    	<% } %>
+			                    </select>
+			                </div>
+			                <div class="col-md-4 mb-3">
+			                    <label for="importe">Importe</label>
+			                    <input type="number" name="importe" class="form-control" id="importe" required="required" value="<%=registro.getImporte()%>">
+			                </div>
+						</div>
+						
 						
 			            <div class="row">
 			                <div class="col-md-4 mb-3">
@@ -104,8 +114,8 @@
 			                    </select>
 			                </div>
 			                <div class="col-md-4 mb-3">
-			                    <label for="importe">Importe</label>
-			                    <input type="number" name="importe" class="form-control" id="importe" required="required" value="<%=registro.getImporte()%>">
+			                    <label for="lugar">Lugar</label>
+			                    <input type="text" name="lugar" class="form-control" id="lugar" required="required" value="<%=registro.getLugar()%>">
 			                </div>
 			            </div>
 						

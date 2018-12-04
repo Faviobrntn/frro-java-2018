@@ -53,17 +53,17 @@ if(request.getSession().getAttribute("usuario") != null){
                     Mis Cuentas
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%= url %>registros/">
+                    <span data-feather="layers"></span>
+                    Mis Registros
+                </a>
+            </li>
             <% } %>
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="bar-chart-2"></span>
                     Reportes
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="layers"></span>
-                    Integrations
                 </a>
             </li>
         </ul>

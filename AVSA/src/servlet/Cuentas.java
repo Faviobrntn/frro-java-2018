@@ -63,27 +63,21 @@ public class Cuentas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			
-			switch (request.getPathInfo()) {
-				case "/alta":
-					try {
-						//Armo un ArrayList para el select
-						CtrlABMMoneda ctrlMoneda = new CtrlABMMoneda();
-						ArrayList<Moneda> monedas = ctrlMoneda.getAll();
-						request.setAttribute("monedas", monedas);
-						request.getRequestDispatcher("/accounts/alta.jsp").forward(request, response);
-					} catch (Exception e) {
-						throw e;
-					}
-					break;
-			}
-			
-			//Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-			
-			CtrlABMCuenta ctrlCuentas = new CtrlABMCuenta();
-			ArrayList<Cuenta> cuentas = ctrlCuentas.getAll(this.user);
-			request.setAttribute("cuentas", cuentas);
+			if(request.getPathInfo().equals("/alta")) {
+				//Armo un ArrayList para el select
+				CtrlABMMoneda ctrlMoneda = new CtrlABMMoneda();
+				ArrayList<Moneda> monedas = ctrlMoneda.getAll();
+				request.setAttribute("monedas", monedas);
+				request.getRequestDispatcher("/accounts/alta.jsp").forward(request, response);
+			}else {
+				//Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+				
+				CtrlABMCuenta ctrlCuentas = new CtrlABMCuenta();
+				ArrayList<Cuenta> cuentas = ctrlCuentas.getAll(this.user);
+				request.setAttribute("cuentas", cuentas);
 
-			request.getRequestDispatcher("/accounts/index.jsp").forward(request, response);
+				request.getRequestDispatcher("/accounts/index.jsp").forward(request, response);
+			}
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
