@@ -45,6 +45,8 @@
 			    <div class="col-md-8">
 			        <h4 class="mb-3">Complete el formulario</h4>
 			        <form action="../registros/modificar" method="post" class="needs-validation">
+			        	<input type="hidden" name="id" value="<%=registro.getId()%>">
+			        	
 			        	<div class="row">
 				            <div class="col-md-6 mb-3">
 			                    <label for="cuenta-id">Cuentas</label>
@@ -78,7 +80,7 @@
 			        	<div class="row">
 			        		<div class="col-md-4 mb-3">
 			                    <label for="fechaHora">Fecha y hora</label>
-			                    <input type="text" name="fecha_hora" class="form-control" id="fechaHora" required="required" value="<%=registro.getFechaHora()%>">
+			                    <input type="text" name="fecha_hora" class="form-control" id="fechaHora" required="required" value="<%=registro.getFechaHora().toLocaleString()%>">
 			                </div>
 				            <div class="col-md-4 mb-3">
 			                    <label for="tipo">Tipo</label>
@@ -105,7 +107,7 @@
 			                    <select name="estado" class="form-control" id="estado" required="required">
 			                    	<option value="">Seleccione el estado</option>
 			                    	<% for (int i = 0; i < estados.length; i++) { %>
-			                    		<% if(registro.getEstado().equals(tipos[i])){ %>
+			                    		<% if(registro.getEstado().equals(estados[i])){ %>
 			                    			<option value="<%= estados[i] %>" selected><%= estados[i] %></option>
 			                    		<% }else{ %>
 			                    			<option value="<%= estados[i] %>"><%= estados[i] %></option>

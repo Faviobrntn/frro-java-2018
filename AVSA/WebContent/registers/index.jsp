@@ -53,7 +53,7 @@
 	              <tbody>
 	              <% for(Registro r : registros){ %>
 	                <tr>
-	                  	<td><%= r.getId() %></td>
+	                  	<td><%= r.getFechaHora().toLocaleString() %></td>
 	                  	<td><%= r.getCuenta().getNombre() %></td>
 	                  	<td><%= r.getCategoria().getNombre() %></td>
 	                  	<td><%= r.getImporte() %></td>

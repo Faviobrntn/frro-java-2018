@@ -142,7 +142,8 @@ public class Registros extends HttpServlet {
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					request.getSession().setAttribute("mensaje", e.getMessage());
-					request.getRequestDispatcher("/registers/index.jsp").forward(request, response);
+					//request.getRequestDispatcher("/registers/index.jsp").forward(request, response);
+					response.sendRedirect("../registros/");
 				}
 				break;
 		}
@@ -151,7 +152,7 @@ public class Registros extends HttpServlet {
 	
 	private void alta(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Registro registro = new Registro();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		Date fechaHora = dateFormat.parse(request.getParameter("fecha_hora"));
 		
 		registro.setTipo(request.getParameter("tipo"));
@@ -202,7 +203,7 @@ public class Registros extends HttpServlet {
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		Registro registro = new Registro();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		Date fechaHora = dateFormat.parse(request.getParameter("fecha_hora"));
 		
 		registro.setId(Integer.parseInt(request.getParameter("id")));

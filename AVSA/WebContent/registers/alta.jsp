@@ -69,7 +69,7 @@
 			        	<div class="row">
 			        		<div class="col-md-4 mb-3">
 			                    <label for="fechaHora">Fecha y hora</label>
-			                    <input type="text" name="fecha_hora" class="form-control" id="fechaHora" required="required" placeholder="dd-mm-aaaa HH:mm">
+			                    <input type="text" name="fecha_hora" class="form-control" id="fechaHora" required="required" placeholder="dd/mm/aaaa HH:mm">
 			                </div>
 				            <div class="col-md-4 mb-3">
 			                    <label for="tipo">Tipo</label>
