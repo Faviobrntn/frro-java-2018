@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,11 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import controlers.CtrlABMCategoria;
 import controlers.CtrlABMCuenta;
 import controlers.CtrlABMRegistro;
-import controlers.CtrlABMRegistro;
 import entity.Categoria;
 import entity.Cuenta;
-import entity.Registro;
-import entity.Moneda;
 import entity.Registro;
 import entity.Usuario;
 import util.Componentes;
@@ -155,10 +153,12 @@ public class Registros extends HttpServlet {
 	
 	private void alta(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Registro registro = new Registro();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		Date fechaHora = dateFormat.parse(request.getParameter("fecha_hora"));
 		
 		registro.setTipo(request.getParameter("tipo"));
-		registro.setFechaHora(request.getParameter("fecha_hora"));
-		registro.setImporte(request.getParameter("importe"));
+		registro.setFechaHora(new Timestamp(fechaHora.getTime()));
+		registro.setImporte(Float.parseFloat(request.getParameter("importe")));
 		registro.setEstado(request.getParameter("estado"));
 		registro.setLugar(request.getParameter("lugar"));
 		registro.setNotas(request.getParameter("notas"));
@@ -178,6 +178,65 @@ public class Registros extends HttpServlet {
 		
 		CtrlABMRegistro ctrlRegistro = new CtrlABMRegistro();
 		ctrlRegistro.add(registro);
+	}
+
+	
+	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		Registro registro = new Registro();
+		registro.setId(Integer.parseInt(request.getParameter("id")));
+		
+		CtrlABMRegistro ctrlRegistro = new CtrlABMRegistro();			
+		request.setAttribute("registro", ctrlRegistro.getById(registro));
+		
+		//Armo un ArrayList para el select
+		CtrlABMCuenta ctrlCuentas = new CtrlABMCuenta();
+		ArrayList<Cuenta> cuentas = ctrlCuentas.getAll(this.user);
+		request.setAttribute("cuentas", cuentas);
+		
+		//Armo un ArrayList para el select
+		CtrlABMCategoria ctrlCategorias = new CtrlABMCategoria();
+		ArrayList<Categoria> categorias = ctrlCategorias.getAll();
+		request.setAttribute("categorias", categorias);
+	}
+	
+	
+	private void modificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		Registro registro = new Registro();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		Date fechaHora = dateFormat.parse(request.getParameter("fecha_hora"));
+		
+		registro.setId(Integer.parseInt(request.getParameter("id")));
+		registro.setTipo(request.getParameter("tipo"));
+		registro.setFechaHora(new Timestamp(fechaHora.getTime()));
+		registro.setImporte(Float.parseFloat(request.getParameter("importe")));
+		registro.setEstado(request.getParameter("estado"));
+		registro.setLugar(request.getParameter("lugar"));
+		registro.setNotas(request.getParameter("notas"));
+
+		Date date = new Date();
+		registro.setModificado(new Timestamp(date.getTime()));
+
+		Cuenta cuenta = new Cuenta();
+		Categoria categoria = new Categoria();
+		cuenta.setId(Integer.parseInt(request.getParameter("cuenta_id")));
+		categoria.setId(Integer.parseInt(request.getParameter("categoria_id")));
+		
+		registro.setCuenta(cuenta);
+		registro.setCategoria(categoria);
+		
+		CtrlABMRegistro ctrlRegistro = new CtrlABMRegistro();
+		ctrlRegistro.update(registro);
+	}
+	
+	
+	private void baja(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
+		Registro registro = new Registro();
+		registro.setId(Integer.parseInt(request.getParameter("id")));
+		
+		CtrlABMRegistro ctrlRegistro = new CtrlABMRegistro();
+		ctrlRegistro.delete(registro);
 	}
 
 }

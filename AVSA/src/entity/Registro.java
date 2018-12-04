@@ -14,6 +14,15 @@ public class Registro {
 	private String notas;
 	private Timestamp creado;
 	private Timestamp modificado;
+	public static String[] tipos = {
+			  "Ingresos", 
+			  "Gastos"
+			};
+	public static String[] estados = {
+			  "Conciliado", 
+			  "Procesado",
+			  "Pendiente"
+			};
 	
 	public int getId() {
 		return id;
