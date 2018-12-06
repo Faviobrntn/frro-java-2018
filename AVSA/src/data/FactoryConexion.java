@@ -16,15 +16,15 @@ public class FactoryConexion {
 	
 	private static FactoryConexion instancia;
 	
-	public FactoryConexion() {
+	public FactoryConexion() throws ClassNotFoundException {
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 	
-	public static FactoryConexion getInstancia(){
+	public static FactoryConexion getInstancia() throws ClassNotFoundException{
 		if (FactoryConexion.instancia == null){		
 			FactoryConexion.instancia=new FactoryConexion();
 		}
