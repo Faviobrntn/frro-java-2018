@@ -45,6 +45,7 @@ public class Registrarse extends HttpServlet {
 				request.setAttribute("paises", paises);
 			} catch (Exception e) {
 				request.getSession().setAttribute("mensaje", e.getMessage());
+				response.sendRedirect("login");
 			}
 			request.getRequestDispatcher("/registrarse.jsp").forward(request, response);
 		}
