@@ -67,8 +67,8 @@ public class Categorias extends HttpServlet {
 			request.getRequestDispatcher("/categories/index.jsp").forward(request, response);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			request.getSession().setAttribute("mensaje", e.getMessage());
 		}
 		
 	}

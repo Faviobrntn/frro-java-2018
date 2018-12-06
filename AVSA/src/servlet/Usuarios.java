@@ -55,26 +55,20 @@ public class Usuarios extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			if(request.getPathInfo().equals("/alta")) {
+				//Armo un ArrayList para el select
+				CtrlABMPais ctrlPais = new CtrlABMPais();
+				ArrayList<Pais> paises = ctrlPais.getAll();
+				request.setAttribute("paises", paises);
+				request.getRequestDispatcher("/users/alta.jsp").forward(request, response);
+			}else {
 			
-			switch (request.getPathInfo()) {
-				case "/alta":
-					try {
-						//Armo un ArrayList para el select
-						CtrlABMPais ctrlPais = new CtrlABMPais();
-						ArrayList<Pais> paises = ctrlPais.getAll();
-						request.setAttribute("paises", paises);
-						request.getRequestDispatcher("/users/alta.jsp").forward(request, response);
-					} catch (Exception e) {
-						throw e;
-					}
-					break;
+				CtrlABMUsuario ctrlUser = new CtrlABMUsuario();			
+				ArrayList<Usuario> usuarios = ctrlUser.getAll();
+				request.setAttribute("usuarios", usuarios);
+	
+				request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 			}
-			
-			CtrlABMUsuario ctrlUser = new CtrlABMUsuario();			
-			ArrayList<Usuario> usuarios = ctrlUser.getAll();
-			request.setAttribute("usuarios", usuarios);
-
-			request.getRequestDispatcher("/users/index.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

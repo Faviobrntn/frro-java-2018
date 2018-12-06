@@ -58,9 +58,7 @@ public class Perfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		System.out.println("Get - Perfil");
 		if(request.getSession().getAttribute("usuario") != null) {
-			System.out.println(request.getPathInfo());
 			
 			switch (request.getPathInfo()) {
 			case "/cerrar-sesion":

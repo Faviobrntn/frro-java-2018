@@ -71,8 +71,8 @@ public class Paises extends HttpServlet {
 			request.getRequestDispatcher("/countries/index.jsp").forward(request, response);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			request.getSession().setAttribute("mensaje", e.getMessage());
 		}
 	}
 

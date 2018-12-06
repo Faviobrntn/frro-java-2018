@@ -51,7 +51,7 @@ public class DataUsuario {
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
+			throw e;
 		}
 		
 		return usu;
@@ -119,7 +119,7 @@ public class DataUsuario {
 			if(stmt!=null)stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 	
@@ -220,7 +220,7 @@ public class DataUsuario {
 			if(stmt!=null)stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		
 	}
@@ -246,7 +246,7 @@ public class DataUsuario {
 			if(stmt!=null)stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		
 	}

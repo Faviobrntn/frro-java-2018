@@ -43,7 +43,7 @@ public class DataPais {
 				if(stmt!=null) stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 			
 			return paises;
@@ -113,7 +113,7 @@ public class DataPais {
 			if(stmt!=null)stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 	
@@ -135,7 +135,7 @@ public class DataPais {
 			if(stmt!=null)stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		
 	}
@@ -163,7 +163,7 @@ public class DataPais {
 			if(stmt!=null)stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		
 	}

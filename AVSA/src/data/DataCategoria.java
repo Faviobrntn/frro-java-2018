@@ -40,7 +40,7 @@ public class DataCategoria {
 			if(stmt!=null) stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		
 		return categorias;
@@ -108,7 +108,7 @@ public class DataCategoria {
 			if(stmt!=null)stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 	
@@ -130,7 +130,7 @@ public class DataCategoria {
 			if(stmt!=null)stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		
 	}
@@ -158,7 +158,7 @@ public class DataCategoria {
 			if(stmt!=null)stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		
 	}

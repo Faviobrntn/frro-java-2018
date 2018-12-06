@@ -37,7 +37,7 @@ public class DataMoneda {
 			if(stmt!=null) stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		
 		return paises;
