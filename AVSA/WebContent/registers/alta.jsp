@@ -20,6 +20,8 @@
 
     <!-- Custom styles for this template -->
     <link href="../styles/dashboard.css" rel="stylesheet">
+    
+    <link href="../styles/bootstrap-datetimepicker.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -69,7 +71,7 @@
 			        	<div class="row">
 			        		<div class="col-md-4 mb-3">
 			                    <label for="fechaHora">Fecha y hora</label>
-			                    <input type="text" name="fecha_hora" class="form-control" id="fechaHora" required="required" placeholder="dd/mm/aaaa HH:mm">
+			                    <input type="text" name="fecha_hora" class="form-control fechahoras" id="fechaHora" required="required" placeholder="dd/mm/aaaa HH:mm">
 			                </div>
 				            <div class="col-md-4 mb-3">
 			                    <label for="tipo">Tipo</label>
@@ -118,6 +120,20 @@
    </div>
 
     <jsp:include page="/elementos/footer.jsp"></jsp:include>
+    <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <script src="../js/bootstrap-datetimepicker.min.js"></script>
+    
+    <script type="text/javascript">      
+        $(function () {
+    		$('.fechahoras').datetimepicker({
+                format: "DD/MM/YYYY HH:mm",
+                locale: 'es',
+                defaultDate: false,
+                stepping: 5,
+                sideBySide: true
+            });
+    	});
+    </script>
     
     
   </body>
