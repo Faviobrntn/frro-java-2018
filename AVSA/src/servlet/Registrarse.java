@@ -33,21 +33,22 @@ public class Registrarse extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		if(request.getSession().getAttribute("usuario") != null) {
-			response.sendRedirect("home/");
-		}else {
-			try {
+		
+		try {
+			if(request.getSession().getAttribute("usuario") != null) {
+				response.sendRedirect("home/");
+			}else {
 				//Armo un ArrayList para el select
 				CtrlABMPais ctrlPais = new CtrlABMPais();
 				ArrayList<Pais> paises;
 				paises = ctrlPais.getAll();
 				request.setAttribute("paises", paises);
-			} catch (Exception e) {
-				request.getSession().setAttribute("mensaje", e.getMessage());
-				response.sendRedirect("login");
+				
+				request.getRequestDispatcher("/registrarse.jsp").forward(request, response);
 			}
-			request.getRequestDispatcher("/registrarse.jsp").forward(request, response);
+		} catch (Exception e) {
+			request.getSession().setAttribute("mensaje", e.getMessage());
+			response.sendRedirect("login");
 		}
 	}
 
