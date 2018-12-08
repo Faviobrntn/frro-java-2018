@@ -83,6 +83,7 @@ public class Login extends HttpServlet {
 					response.sendRedirect("home/");
 					
 				} catch (Exception e) {
+					System.out.println(e.getMessage());
 					request.getSession().setAttribute("mensaje", e.getMessage());
 					request.getRequestDispatcher("/index.jsp").forward(request, response);
 				}
