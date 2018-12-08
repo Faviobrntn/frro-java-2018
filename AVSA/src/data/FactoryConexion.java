@@ -10,7 +10,7 @@ public class FactoryConexion {
 	private String host="localhost";
 	private String port="3306";
 	private String user="root";
-	private String pass="";
+	private String pass="root";
 	private String db="aversiahorra";
 	private String type="mysql";
 	
@@ -39,7 +39,7 @@ public class FactoryConexion {
 		try {
 			if(conn==null || conn.isClosed()){	
 				conn = DriverManager.getConnection(
-			        "jdbc:"+type+"://" + host + ":" + port+"/"+db+"?user="+user+"&password="+pass);
+			        "jdbc:"+type+"://" + host + ":" + port+"/"+db+"?user="+user+"&password="+pass+"&useSSL=false");
 			}
 		} catch (SQLException e) {
 			throw new AppDataException(e, "Error al conectar a la base de datos");
