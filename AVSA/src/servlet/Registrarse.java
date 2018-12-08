@@ -13,6 +13,7 @@ import controlers.CtrlABMPais;
 import controlers.CtrlABMUsuario;
 import entity.Pais;
 import entity.Usuario;
+import util.Emailer;
 
 /**
  * Servlet implementation class Registrarse
@@ -76,7 +77,7 @@ public class Registrarse extends HttpServlet {
 			CtrlABMUsuario ctrlUsuario = new CtrlABMUsuario();
 		
 			ctrlUsuario.add(user);
-			
+			Emailer.getInstance().send(user.getEmail(), "AVerSiAhorra - Su usuario ha sido cread", "Datos del usuario registrados"+user.toString());
 			response.sendRedirect("login");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
