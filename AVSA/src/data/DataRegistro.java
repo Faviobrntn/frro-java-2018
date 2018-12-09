@@ -237,7 +237,7 @@ public class DataRegistro {
 			if(filtro.getTipo() != null) {
 				query += " AND r.tipo = '"+filtro.getTipo()+"'";
 			}
-			System.out.println(query);
+
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(query);
 			stmt.setInt(1, u.getId());
 			
