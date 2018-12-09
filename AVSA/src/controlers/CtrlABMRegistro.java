@@ -34,5 +34,10 @@ public class CtrlABMRegistro {
 		return dataRegistro.getAll(user);
 	}
 	
+	
+	public ArrayList<Registro> reporte(Usuario user, Registro filtro)throws Exception{
+		return dataRegistro.reporte(user, filtro);
+	}
+	
 
 }

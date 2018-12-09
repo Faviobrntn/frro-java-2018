@@ -157,7 +157,14 @@ public class Registros extends HttpServlet {
 		
 		registro.setTipo(request.getParameter("tipo"));
 		registro.setFechaHora(new Timestamp(fechaHora.getTime()));
-		registro.setImporte(Float.parseFloat(request.getParameter("importe")));
+		
+		if(request.getParameter("tipo").equals("Ingresos")) {
+			registro.setImporte(Math.abs(Float.parseFloat(request.getParameter("importe"))));
+		}else if(request.getParameter("tipo").equals("Gastos")){
+			registro.setImporte(Math.abs(Float.parseFloat(request.getParameter("importe"))) * (-1));
+		}else {
+			registro.setImporte(Float.parseFloat(request.getParameter("importe")));
+		}
 		registro.setEstado(request.getParameter("estado"));
 		registro.setLugar(request.getParameter("lugar"));
 		registro.setNotas(request.getParameter("notas"));
@@ -201,7 +208,6 @@ public class Registros extends HttpServlet {
 	
 	
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		Registro registro = new Registro();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		Date fechaHora = dateFormat.parse(request.getParameter("fecha_hora"));
@@ -209,7 +215,14 @@ public class Registros extends HttpServlet {
 		registro.setId(Integer.parseInt(request.getParameter("id")));
 		registro.setTipo(request.getParameter("tipo"));
 		registro.setFechaHora(new Timestamp(fechaHora.getTime()));
-		registro.setImporte(Float.parseFloat(request.getParameter("importe")));
+		
+		if(request.getParameter("tipo").equals("Ingresos")) {
+			registro.setImporte(Math.abs(Float.parseFloat(request.getParameter("importe"))));
+		}else if(request.getParameter("tipo").equals("Gastos")){
+			registro.setImporte(Math.abs(Float.parseFloat(request.getParameter("importe"))) * (-1));
+		}else {
+			registro.setImporte(Float.parseFloat(request.getParameter("importe")));
+		}
 		registro.setEstado(request.getParameter("estado"));
 		registro.setLugar(request.getParameter("lugar"));
 		registro.setNotas(request.getParameter("notas"));

@@ -1,5 +1,5 @@
-/controlers/
-/data/
-/entity/
+/app.properties
 /servlet/
-/util/
+/data/
+/controlers/
+/entity/

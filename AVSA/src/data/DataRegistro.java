@@ -214,4 +214,73 @@ public class DataRegistro {
 	
 	
 	
+	public ArrayList<Registro> reporte(Usuario u, Registro filtro) throws Exception{
+		
+		//Statement stmt=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		ArrayList<Registro> registros= new ArrayList<Registro>();
+		try{
+			String query = "SELECT * FROM registros r INNER JOIN cuentas c ON c.id = r.id_cuenta INNER JOIN categorias cat ON cat.id = r.id_categoria WHERE r.id_usuario = ?";
+			if(filtro.getFdesde() != null) {
+				query += " AND r.fecha_hora >= '"+filtro.getFdesde()+"'";
+			}
+			
+			if(filtro.getFhasta() != null) {
+				query += " AND r.fecha_hora <= '"+filtro.getFhasta()+"'";
+			}
+			
+			if(filtro.getEstado() != null) {
+				query += " AND r.estado = '"+filtro.getEstado()+"'";
+			}
+			
+			if(filtro.getTipo() != null) {
+				query += " AND r.tipo = '"+filtro.getTipo()+"'";
+			}
+			System.out.println(query);
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(query);
+			stmt.setInt(1, u.getId());
+			
+			rs=stmt.executeQuery();			
+			
+			if(rs!=null){
+				while(rs.next()){
+					Registro r = new Registro();
+					r.setCuenta(new Cuenta());
+					r.setCategoria(new Categoria());
+					r.setId(rs.getInt("id"));
+					r.setTipo(rs.getString("tipo"));
+					r.setFechaHora(rs.getTimestamp("fecha_hora"));
+					r.setImporte(rs.getFloat("importe"));
+					r.setEstado(rs.getString("estado"));
+					r.setLugar(rs.getString("lugar"));
+					r.setNotas(rs.getString("notas"));
+					r.setCreado(rs.getTimestamp("creado"));
+					r.setModificado(rs.getTimestamp("modificado"));
+					
+					
+					r.getCuenta().setId(rs.getInt("c.id"));
+					r.getCuenta().setNombre(rs.getString("c.nombre"));
+					
+					r.getCategoria().setId(rs.getInt("cat.id"));
+					r.getCategoria().setNombre(rs.getString("cat.nombre"));
+					
+					registros.add(r);
+				}
+			}
+		} catch (Exception e){
+			throw e;
+		}
+		
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			throw e;
+		}
+		
+		return registros;
+	}
+	
 }

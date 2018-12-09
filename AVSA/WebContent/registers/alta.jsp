@@ -71,7 +71,7 @@
 			        	<div class="row">
 			        		<div class="col-md-4 mb-3">
 			                    <label for="fechaHora">Fecha y hora</label>
-			                    <input type="text" name="fecha_hora" class="form-control fechahoras" id="fechaHora" required="required" placeholder="dd/mm/aaaa HH:mm">
+			                    <input type="text" name="fecha_hora" class="form-control fechahora" id="fechaHora" required="required" placeholder="dd/mm/aaaa HH:mm">
 			                </div>
 				            <div class="col-md-4 mb-3">
 			                    <label for="tipo">Tipo</label>
@@ -83,7 +83,7 @@
 			                </div>
 							<div class="col-md-4 mb-3">
 			                    <label for="importe">Importe</label>
-			                    <input type="number" name="importe" class="form-control" id="importe" required="required">
+			                    <input type="number" name="importe" class="form-control" id="importe" step="0.01" required="required">
 			                </div>
 						</div>
 			        	
@@ -120,20 +120,6 @@
    </div>
 
     <jsp:include page="/elementos/footer.jsp"></jsp:include>
-    <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
-    <script src="../js/bootstrap-datetimepicker.min.js"></script>
-    
-    <script type="text/javascript">      
-        $(function () {
-    		$('.fechahoras').datetimepicker({
-                format: "DD/MM/YYYY HH:mm",
-                locale: 'es',
-                defaultDate: false,
-                stepping: 5,
-                sideBySide: true
-            });
-    	});
-    </script>
     
     
   </body>

@@ -14,6 +14,9 @@ public class Registro {
 	private String notas;
 	private Timestamp creado;
 	private Timestamp modificado;
+	
+	private Timestamp fdesde;
+	private Timestamp fhasta;
 	public static String[] tipos = {
 			  "Ingresos", 
 			  "Gastos"
@@ -106,6 +109,18 @@ public class Registro {
 	}
 	public void setModificado(Timestamp modificado) {
 		this.modificado = modificado;
+	}
+	public Timestamp getFdesde() {
+		return fdesde;
+	}
+	public void setFdesde(Timestamp fdesde) {
+		this.fdesde = fdesde;
+	}
+	public Timestamp getFhasta() {
+		return fhasta;
+	}
+	public void setFhasta(Timestamp fhasta) {
+		this.fhasta = fhasta;
 	}
 	
 	
