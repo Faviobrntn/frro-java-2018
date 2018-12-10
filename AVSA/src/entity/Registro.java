@@ -123,7 +123,17 @@ public class Registro {
 		this.fhasta = fhasta;
 	}
 	
-	
+	public String generarLista(Registro r) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(r.getFechaHora().toLocaleString()+";");
+		stringBuilder.append(r.getCuenta().getNombre()+";");
+		stringBuilder.append(r.getCategoria().getNombre()+";");
+		stringBuilder.append(r.getImporte()+";");
+		stringBuilder.append(r.getTipo()+";");
+		stringBuilder.append(r.getEstado()+";");
+		//stringBuilder.append("\n");
+		return stringBuilder.toString();
+	}
 	
 
 }

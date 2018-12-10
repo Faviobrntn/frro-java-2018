@@ -36,7 +36,15 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 	            <h1 class="h2">Reportes de registros</h1>
-	            <div class="btn-toolbar mb-2 mb-md-0"> </div>
+	            <div class="btn-toolbar mb-2 mb-md-0">
+	            	<form method="post">
+						<input type="hidden" name="fdesde" value="<%= request.getParameter("fdesde") %>">
+						<input type="hidden" name="fhasta" value="<%= request.getParameter("fhasta") %>">
+						<input type="hidden" name="estado" value="<%= request.getParameter("estado") %>">
+						<input type="hidden" name="tipo" value="<%= request.getParameter("tipo") %>">
+						<button type="submit" class="btn btn-sm btn-outline-secondary"><span data-feather="download"></span> Descargar CSV</button>
+					</form>
+	            </div>
 	        </div>
 	        <div class="row">
 	        	<div class="col-sm-12 col-md-12 col-lg-12">
@@ -45,7 +53,7 @@
 	                		<h5 class="card-title">Filtro</h5>
 				            <p class="card-text"></p>
 				            
-				            <form method="post" autocomplete="off">
+				            <form method="get" autocomplete="off">
 								  <div class="form-row">
 								    <div class="form-group col-md-2">
 								      <label for="fecha-desde">Fecha desde</label>
