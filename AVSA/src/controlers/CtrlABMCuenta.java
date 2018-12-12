@@ -34,5 +34,16 @@ public class CtrlABMCuenta {
 		return dataCuenta.getAll(user);
 	}
 	
+	public ArrayList<Cuenta> getCuentas(Usuario user)throws Exception{
+		return dataCuenta.getCuentas(user);
+	}
+	
+//	public Cuenta getSaldo(Cuenta c) throws Exception {
+//		return dataCuenta.getSaldo(c);
+//	}
+	
+	public float getSaldo(Cuenta c) throws Exception {
+		return dataCuenta.getSaldo(c);
+	}
 
 }

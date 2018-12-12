@@ -135,7 +135,7 @@ public class ReportesRegistros extends HttpServlet {
 	
 			if (registros!= null) {
 		        response.setContentType("text/csv");
-		        response.setHeader("Content-Disposition", "attachment; filename=\"datos.csv\"");
+		        response.setHeader("Content-Disposition", "attachment; filename=\"registros.csv\"");
 		        if (!request.isSecure()) {
 		            response.setHeader("Cache-Control", "no-cache");
 		            response.setHeader("Pragma", "no-cache");
@@ -145,7 +145,6 @@ public class ReportesRegistros extends HttpServlet {
 		        writer = response.getWriter();
 		        writer.println("Fecha;Cuenta;Categoria;Importe;Tipo;Estado;"); // Encabezado
 		        for (Registro d : registros) {
-		            //CSVUtils.writeLine(writer, filtro.generarLista(d));
 		        	writer.println(filtro.generarLista(d));
 		        }
 		        writer.flush();

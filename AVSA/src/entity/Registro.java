@@ -15,6 +15,7 @@ public class Registro {
 	private Timestamp creado;
 	private Timestamp modificado;
 	
+	
 	private Timestamp fdesde;
 	private Timestamp fhasta;
 	public static String[] tipos = {
@@ -132,6 +133,24 @@ public class Registro {
 		stringBuilder.append(r.getTipo()+";");
 		stringBuilder.append(r.getEstado()+";");
 		//stringBuilder.append("\n");
+		return stringBuilder.toString();
+	}
+	
+	public String generarJson(Registro r) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("{");
+		stringBuilder.append("\"id\":"+r.getId()+",");
+		stringBuilder.append("\"start\":\""+r.getFechaHora()+"\",");
+		stringBuilder.append("\"end\":\""+r.getFechaHora()+"\",");
+		if(r.getTipo().equals("Ingresos")) {
+			stringBuilder.append("\"color\":\"#abe6ab\",");
+		}
+		if(r.getTipo().equals("Gastos")) {
+			stringBuilder.append("\"color\":\"#eaafaf\",");
+		}
+		stringBuilder.append("\"importe\":\""+r.getImporte()+"\",");
+		stringBuilder.append("\"title\":\""+r.getTipo()+"\"");
+		stringBuilder.append("}");
 		return stringBuilder.toString();
 	}
 	

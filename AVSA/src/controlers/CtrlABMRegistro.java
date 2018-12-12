@@ -39,5 +39,36 @@ public class CtrlABMRegistro {
 		return dataRegistro.reporte(user, filtro);
 	}
 	
+	
+	public String generarLista(Registro r) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(r.getFechaHora().toLocaleString()+";");
+		stringBuilder.append(r.getCuenta().getNombre()+";");
+		stringBuilder.append(r.getCategoria().getNombre()+";");
+		stringBuilder.append(r.getImporte()+";");
+		stringBuilder.append(r.getTipo()+";");
+		stringBuilder.append(r.getEstado()+";");
+		//stringBuilder.append("\n");
+		return stringBuilder.toString();
+	}
+	
+	public String generarJson(Registro r) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("{");
+		stringBuilder.append("\"id\":"+r.getId()+",");
+		stringBuilder.append("\"start\":\""+r.getFechaHora()+"\",");
+		stringBuilder.append("\"end\":\""+r.getFechaHora()+"\",");
+		if(r.getTipo().equals("Ingresos")) {
+			stringBuilder.append("\"color\":\"#abe6ab\",");
+		}
+		if(r.getTipo().equals("Gastos")) {
+			stringBuilder.append("\"color\":\"#eaafaf\",");
+		}
+		stringBuilder.append("\"importe\":\""+r.getImporte()+"\",");
+		stringBuilder.append("\"title\":\""+r.getTipo()+"\"");
+		stringBuilder.append("}");
+		return stringBuilder.toString();
+	}
+		
 
 }

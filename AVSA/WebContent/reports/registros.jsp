@@ -1,5 +1,4 @@
 <%@page import="java.util.ArrayList, entity.Registro"%>
-<%@page import="entity.Registro"%>
 <% ArrayList<Registro> registros = (ArrayList<Registro>) request.getAttribute("registros"); %>
 <% String[] tipos = Registro.tipos; %>
 <% String[] estados = Registro.estados; %>

@@ -84,6 +84,5 @@ public class Cuenta {
 	public void setCreado(Timestamp creado) {
 		this.creado = creado;
 	}
-	
 
 }

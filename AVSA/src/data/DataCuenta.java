@@ -59,6 +59,49 @@ public class DataCuenta {
 	}
 	
 	
+	public ArrayList<Cuenta> getCuentas(Usuario u) throws Exception{
+
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		ArrayList<Cuenta> cuentas= new ArrayList<Cuenta>();
+		float saldo = 0;
+		try{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT c.id, c.nombre, c.valor_inicial, c.color, SUM(r.importe) as saldo FROM cuentas c LEFT JOIN registros r ON r.id_cuenta = c.id WHERE c.id_usuario = ?");
+			stmt.setInt(1, u.getId());
+			
+			rs=stmt.executeQuery();			
+			
+			if(rs!=null){
+				while(rs.next()){
+					saldo = 0;
+					Cuenta c = new Cuenta();
+					c.setId(rs.getInt("id"));
+					c.setNombre(rs.getString("nombre"));
+					c.setValorInicial(rs.getFloat("valor_inicial"));
+					c.setColor(rs.getString("color"));
+					saldo = (rs.getFloat("valor_inicial") + rs.getFloat("saldo"));
+					c.setSaldo(saldo);
+					
+					cuentas.add(c);
+				}
+			}
+		} catch (Exception e){
+			throw e;
+		}
+		
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			throw e;
+		}
+		
+		return cuentas;
+	}
+	
+	
 	public Cuenta getById(Cuenta cuenta) throws Exception{
 		
 		PreparedStatement stmt=null;
@@ -195,6 +238,68 @@ public class DataCuenta {
 		
 	}
 	
+	
+//	public Cuenta getSaldo(Cuenta account) throws Exception{	
+//		PreparedStatement stmt=null;
+//		ResultSet rs=null;
+//		Cuenta c = null;
+//		try{
+//			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+//					"SELECT c.id, c.nombre, c.color, SUM(r.importe) as saldo FROM cuentas c INNER JOIN registros r ON r.id_cuenta = c.id WHERE c.id = ?");
+//			stmt.setInt(1, account.getId());
+//			
+//			rs=stmt.executeQuery();			
+//			
+//			if(rs!=null && rs.next()){
+//				c = new Cuenta();
+//				c.setId(rs.getInt("id"));
+//				c.setNombre(rs.getString("nombre"));
+//				c.setColor(rs.getString("color"));
+//				c.setSaldo(rs.getFloat("saldo"));
+//			}
+//		} catch (Exception e){
+//			throw e;
+//		}
+//		
+//		try {
+//			if(rs!=null) rs.close();
+//			if(stmt!=null) stmt.close();
+//			FactoryConexion.getInstancia().releaseConn();
+//		} catch (SQLException e) {
+//			throw e;
+//		}
+//		
+//		return c;
+//	}
+	
+	public float getSaldo(Cuenta account) throws Exception{	
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		float saldo = 0;
+		try{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT c.id, c.nombre, c.color, SUM(r.importe) as saldo FROM cuentas c INNER JOIN registros r ON r.id_cuenta = c.id WHERE c.id = ?");
+			stmt.setInt(1, account.getId());
+			
+			rs=stmt.executeQuery();			
+			
+			if(rs!=null && rs.next()){
+				saldo = rs.getFloat("saldo");
+			}
+		} catch (Exception e){
+			throw e;
+		}
+		
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			throw e;
+		}
+		
+		return saldo;
+	}
 	
 	
 }

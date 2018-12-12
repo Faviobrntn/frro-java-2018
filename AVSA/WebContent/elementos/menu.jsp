@@ -59,6 +59,12 @@ if(request.getSession().getAttribute("usuario") != null){
                     Mis Registros
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%= url %>calendario/">
+                    <span data-feather="layers"></span>
+                    Calendario
+                </a>
+            </li>
             <% } %>
         </ul>
 
@@ -73,6 +79,13 @@ if(request.getSession().getAttribute("usuario") != null){
                 <a class="nav-link" href="<%= url %>reportes/registros">
                     <span data-feather="bar-chart-2"></span>
                     Registros
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="<%= url %>reportes/estadisticas-anuales">
+                    <span data-feather="bar-chart-2"></span>
+                    Estadisticas Anuales
                 </a>
             </li>
            <!-- <li class="nav-item">

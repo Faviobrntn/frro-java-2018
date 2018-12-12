@@ -1,6 +1,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entity.Cuenta"%>
+<%@page import="controlers.CtrlABMCuenta" %>
 <% ArrayList<Cuenta> cuentas = (ArrayList<Cuenta>) request.getAttribute("cuentas"); %>
+<% CtrlABMCuenta controlador = new CtrlABMCuenta(); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -48,7 +50,7 @@
 			        	<div class="card mb-4 shadow-sm" style="background-color: <%= c.getColor() %>;color: white;border-radius: 10px;">
 		                	<div class="card-body">
 		                  		<h4 class="mb-3"><%= c.getNombre() %></h4>
-					            <p class="card-text">Saldo: $ <%= c.getValorInicial() %></p>
+					            <p class="card-text">Saldo: $ <%= controlador.getSaldo(c) + c.getValorInicial() %></p>
 		                	</div>
 		              	</div>
 	              	</a>
