@@ -95,6 +95,9 @@ public class DataUsuario {
 		PreparedStatement stmt=null;
 		ResultSet keyResultSet=null;
 		try {
+			Usuario user = this.getByEmail(u);
+			
+			if(user != null) throw new AppDataException("El E-mail ya se encuentra registrado. Por favor, intente con uno diferente.");
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
 					"INSERT INTO usuarios(nombre, apellido, email, password, id_pais, rol) values (?,?,?,?,?,?)",
@@ -285,5 +288,41 @@ public class DataUsuario {
 
 		return u;
 	}
+	
+	
+	public Usuario getByEmail(Usuario usu) throws Exception{
+		Usuario u=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT u.id, u.nombre, u.apellido, u.email, u.id_pais, p.nombre FROM usuarios u INNER JOIN paises p on u.id_pais=p.id WHERE email=?");
+			stmt.setString(1, usu.getEmail());
+			rs=stmt.executeQuery();
+			
+			if(rs!=null && rs.next()){
+					u=new Usuario();
+					u.setPais(new Pais());
+					u.setId(rs.getInt("id"));
+					u.setNombre(rs.getString("nombre"));
+					u.setApellido(rs.getString("apellido"));
+					u.setEmail(rs.getString("email"));
+					u.getPais().setId(rs.getInt("id_pais"));
+					u.getPais().setNombre(rs.getString("nombre"));
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		} finally{
+			try {
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
 
+		return u;
+	}
 }

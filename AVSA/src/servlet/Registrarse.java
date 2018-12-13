@@ -77,12 +77,16 @@ public class Registrarse extends HttpServlet {
 			CtrlABMUsuario ctrlUsuario = new CtrlABMUsuario();
 		
 			ctrlUsuario.add(user);
-			Emailer.getInstance().send(user.getEmail(), "AVerSiAhorra - Su usuario ha sido cread", "Datos del usuario registrados"+user.toString());
+			
+			Emailer.getInstance().send(user.getEmail(), "AVerSiAhorra - Su usuario ha sido creado", "Bienvenido "+user.getNombre()+ " a tu billetera virtual! Controla los gastos de manera facil.");
+			
+			request.getSession().setAttribute("mensaje", "Se ha registrado con éxito!");
 			response.sendRedirect("login");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			request.getSession().setAttribute("mensaje", e.getMessage());
-			request.getRequestDispatcher("/registrarse.jsp").forward(request, response);
+			//request.getRequestDispatcher("/registrarse.jsp").forward(request, response);
+			doGet(request, response);
 		}
 	}
 

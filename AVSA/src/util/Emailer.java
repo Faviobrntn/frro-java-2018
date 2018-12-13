@@ -57,6 +57,8 @@ public class Emailer {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(props.getProperty("mail.username")));
+			//message.setFrom(new InternetAddress("no-responder@aversiahorra.com"));
+			message.setReplyTo(InternetAddress.parse(props.getProperty("mail.username")));
 			
 			//despues viene el recipients que setea quien lo va a recibir,recibe dos cosas,que tipo de recipien es y un arraylist
 			//de direcciones de internet o una sola,en el InternetAddress.parse(to) los convierte en un arraylist de internetaddress

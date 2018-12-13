@@ -24,7 +24,10 @@ public class AppDataException extends Exception{
 		this.message = message;
 	}
 
-
+	public AppDataException(String message){
+		this.setMessage(message);
+	}
+	
 	public AppDataException(Throwable e, String message){
 		this.innerException=e;
 		this.setMessage(message);
