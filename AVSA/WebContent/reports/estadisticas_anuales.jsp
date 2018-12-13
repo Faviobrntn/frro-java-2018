@@ -1,6 +1,7 @@
-<%@page import="java.util.ArrayList, entity.Registro"%>
+<%@page import="java.util.ArrayList, java.util.Map, entity.Registro"%>
 <% ArrayList<Registro> registros = (ArrayList<Registro>) request.getAttribute("registros"); %>
 <% String colorIngreso = "#abe6ab"; String colorGasto = "#eaafaf"; %>
+<% Map<String, Float> grafico = (Map<String, Float>) request.getAttribute("grafico"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="es">
@@ -86,13 +87,19 @@
     <!-- Graphs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script>
-      var ctx = document.getElementById("myChart");
-      var myChart = new Chart(ctx, {
+    	//var meses = {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0};
+    	var meses = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    	<% for (Map.Entry<String, Float> entry : grafico.entrySet()) { %>
+		    meses[(<%= entry.getKey() %>) - 1] = <%= entry.getValue() %>;
+		<% }  %>
+      	var ctx = document.getElementById("myChart");
+      	var myChart = new Chart(ctx, {
         type: 'line',
         data: {
           labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
           datasets: [{
-            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            //data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            data: meses,
             lineTension: 0,
             backgroundColor: 'transparent',
             borderColor: '#007bff',

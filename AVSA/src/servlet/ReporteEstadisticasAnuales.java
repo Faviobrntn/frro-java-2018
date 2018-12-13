@@ -1,11 +1,11 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -83,15 +83,22 @@ public class ReporteEstadisticasAnuales extends HttpServlet {
 			CtrlABMRegistro ctrlRegistros = new CtrlABMRegistro();
 			ArrayList<Registro> registros;
 			registros = ctrlRegistros.reporte(this.user, filtro);
-		
 			request.setAttribute("registros", registros);
+			
+			Map<String, Float> grafico;
+			grafico = ctrlRegistros.reporteAnual(this.user, filtro);
+			request.setAttribute("grafico", grafico);
+			
+			for (Map.Entry<String, Float> entry : grafico.entrySet()) {
+			    System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+			}
 	
 			request.getRequestDispatcher("/reports/estadisticas_anuales.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			request.getSession().setAttribute("mensaje", e.getMessage());
-			response.sendRedirect("/home");
+			response.sendRedirect("../home/");
 		}
 	}
 

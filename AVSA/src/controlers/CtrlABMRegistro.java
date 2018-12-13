@@ -1,6 +1,7 @@
 package controlers;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import data.DataRegistro;
 import entity.Registro;
@@ -37,6 +38,10 @@ public class CtrlABMRegistro {
 	
 	public ArrayList<Registro> reporte(Usuario user, Registro filtro)throws Exception{
 		return dataRegistro.reporte(user, filtro);
+	}
+	
+	public Map<String, Float> reporteAnual(Usuario user, Registro filtro)throws Exception{
+		return dataRegistro.anual(user, filtro);
 	}
 	
 	

@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import entity.Categoria;
 import entity.Cuenta;
@@ -283,4 +285,47 @@ public class DataRegistro {
 		return registros;
 	}
 	
+	
+	
+	public Map<String, Float> anual(Usuario u, Registro filtro) throws Exception{
+
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Map<String, Float> registros = new HashMap<String, Float>();
+		try{
+			String query = "SELECT MONTH(r.fecha_hora) as mes, SUM(r.importe) as saldo FROM registros r WHERE r.id_usuario = ?";
+			if(filtro.getFdesde() != null) {
+				query += " AND r.fecha_hora >= '"+filtro.getFdesde()+"'";
+			}
+			
+			if(filtro.getFhasta() != null) {
+				query += " AND r.fecha_hora <= '"+filtro.getFhasta()+"'";
+			}
+			
+			query += " GROUP BY mes";
+			
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(query);
+			stmt.setInt(1, u.getId());
+			
+			rs=stmt.executeQuery();			
+			
+			if(rs!=null){
+				while(rs.next()){
+					registros.put(rs.getString("mes"), rs.getFloat("saldo"));
+				}
+			}
+		} catch (Exception e){
+			throw e;
+		}
+		
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			throw e;
+		}
+		
+		return registros;
+	}
 }
