@@ -67,7 +67,8 @@ if(request.getSession().getAttribute("usuario") != null){
             </li>
             <% } %>
         </ul>
-
+		
+		<% if(user.getRol().equals("usuario")){ %>
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>Reportes</span>
             <a class="d-flex align-items-center text-muted" href="#">
@@ -95,5 +96,6 @@ if(request.getSession().getAttribute("usuario") != null){
                 </a>
             </li> -->
         </ul>
+        <% } %>
     </div>
 </nav>

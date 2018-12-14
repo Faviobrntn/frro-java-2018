@@ -1,4 +1,11 @@
 <%! String url = "/AVerSiAhorra/"; %>
+<%@page import="entity.Usuario"%>
+<% 
+Usuario user = new Usuario();
+if(request.getSession().getAttribute("usuario") != null){ 
+	user = (Usuario) request.getSession().getAttribute("usuario");
+} 
+%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,7 +39,8 @@
       				<h1 class="h2">Dashboard</h1>
       				<div class="btn-toolbar mb-2 mb-md-0"></div>
       			</div>
-        	
+        		
+        		<% if(user.getRol().equals("usuario")){  %>
 				<div class="jumbotron">
 					<h1 class="display-4">Bienvenido!</h1>
 					<p class="lead">A ver si ahorra le ayuda a controlar sus gastos y asi tomarse esas vacaciones bien merecidas.</p>
@@ -40,6 +48,7 @@
 					<p>Comience cargando las <a href="<%= url %>cuentas/" role="button">cuentas</a> que utliza a diario y luego solo <a href="<%= url %>registros/" role="button">registre</a> sus movimientos</p>
 					<a class="btn btn-primary btn-lg" href="<%= url %>cuentas/alta" role="button">Comenzar!</a>
 				</div>
+				<% } %>
 			</main>
 		</div>
 	</div>

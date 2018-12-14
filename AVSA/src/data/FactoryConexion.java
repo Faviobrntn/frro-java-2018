@@ -1,6 +1,8 @@
 package data;
 
+import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
 
 import util.AppDataException;
 
@@ -37,7 +39,21 @@ public class FactoryConexion {
 	private int cantConn=0;
 	public Connection getConn() throws SQLException,AppDataException{
 		try {
-			if(conn==null || conn.isClosed()){	
+			if(conn==null || conn.isClosed()){
+				try {
+					Properties prop = new Properties();
+		            prop.load(new java.io.FileInputStream(System.getProperty("user.home") + "/mydb.cfg"));
+		 
+		            host = prop.getProperty("host").toString();
+		            user = prop.getProperty("username").toString();
+		            pass = prop.getProperty("password").toString();
+		            driver = prop.getProperty("driver").toString();
+		            type = prop.getProperty("type").toString();
+		            db = prop.getProperty("db").toString();
+		            port = "";
+		        } catch (IOException e) {
+		            System.out.println("No se puede encontrar mydb.cfg in " + System.getProperty("user.home") + "\nPor favor, asegúrese de que el archivo de configuración creado en esta carpeta.");   
+		        }
 				conn = DriverManager.getConnection(
 			        "jdbc:"+type+"://" + host + ":" + port+"/"+db+"?user="+user+"&password="+pass+"&useSSL=false");
 			}
