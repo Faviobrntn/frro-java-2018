@@ -62,21 +62,17 @@ public class ReportesRegistros extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//String[] filtro = new String[4];
-			//Map<String, String> filtro = new HashMap<String, String>();
+
 			Registro filtro = new Registro();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+			Date fechaHora = null;
 			
 			if(request.getParameter("fdesde") != null && request.getParameter("fdesde") != "") {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-				Date fechaHora = dateFormat.parse(request.getParameter("fdesde") + " 00:00");
-				
+				fechaHora = dateFormat.parse(request.getParameter("fdesde") + " 00:00");
 				filtro.setFdesde(new Timestamp(fechaHora.getTime()));
-				//filtro.put("fdesde", fechaHora.getTime());
 			}
 			if(request.getParameter("fhasta") != null && request.getParameter("fhasta") != "") {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-				Date fechaHora = dateFormat.parse(request.getParameter("fhasta") + " 23:59");
-				
+				dateFormat.parse(request.getParameter("fhasta") + " 23:59");
 				filtro.setFhasta(new Timestamp(fechaHora.getTime()));
 			}
 			if(request.getParameter("estado") != null && request.getParameter("estado") != "") {
@@ -85,7 +81,6 @@ public class ReportesRegistros extends HttpServlet {
 			if(request.getParameter("tipo") != null && request.getParameter("tipo") != "") {
 				filtro.setTipo(request.getParameter("tipo"));
 			}
-			
 			
 			CtrlABMRegistro ctrlRegistros = new CtrlABMRegistro();
 			ArrayList<Registro> registros;
@@ -107,17 +102,15 @@ public class ReportesRegistros extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {	
 			Registro filtro = new Registro();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+			Date fechaHora = null;
 			
 			if(!request.getParameter("fdesde").equals("null") && !request.getParameter("fdesde").isEmpty() ) {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-				Date fechaHora = dateFormat.parse(request.getParameter("fdesde") + " 00:00");
-				
+				fechaHora = dateFormat.parse(request.getParameter("fdesde") + " 00:00");
 				filtro.setFdesde(new Timestamp(fechaHora.getTime()));
 			}
 			if(!request.getParameter("fhasta").equals("null") && !request.getParameter("fhasta").isEmpty()) {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-				Date fechaHora = dateFormat.parse(request.getParameter("fhasta") + " 23:59");
-				
+				fechaHora = dateFormat.parse(request.getParameter("fhasta") + " 23:59");
 				filtro.setFhasta(new Timestamp(fechaHora.getTime()));
 			}
 			if(!request.getParameter("estado").equals("null") && !request.getParameter("estado").isEmpty()) {
@@ -129,10 +122,8 @@ public class ReportesRegistros extends HttpServlet {
 			
 			CtrlABMRegistro ctrlRegistros = new CtrlABMRegistro();
 			ArrayList<Registro> registros;
-		
 			registros = ctrlRegistros.reporte(this.user, filtro);
 		
-	
 			if (registros!= null) {
 		        response.setContentType("text/csv");
 		        response.setHeader("Content-Disposition", "attachment; filename=\"registros.csv\"");
@@ -155,9 +146,7 @@ public class ReportesRegistros extends HttpServlet {
 			System.out.println(e.getMessage());
 			request.getSession().setAttribute("mensaje", e.getMessage());
 			doGet(request, response);
-		} finally {
-			
-		}
+		} finally {	}
 	}
 
 }
