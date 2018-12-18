@@ -1,2 +1,7 @@
+/app.properties
+/controlers/
 /data/
+/entity/
+/log4j2.xml
 /servlet/
+/util/
